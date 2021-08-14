@@ -18,69 +18,72 @@
 
     <section id="container">
         <header id="header" >
-            <section id="loading-page" v-if="wOnLoad()">
+            <section id="loading-page">
                 <img class="pulse" :src="logo" width="120px">
             </section>
+
+            <a id="btn-up" href="#" @click="currentId=''">up</a>
+
             <img :src="logo" width="120px">
-            <h1>{{ title }}</h1>
+            <h1 class="title">{{ title }}</h1>
 
             <h5>Table Of Content:</h5>
             <div id="table-of-content">
-                <template v-for="data in allId">
-                    <a class="hrefSub" :href="'#'+data.id">{{data.subTitle}}</a>
+                <template v-for="(data,index) of allId">
+                    <a :class="{hrefSub:true,clicked:currentId == data.id}" @click="currentId=data.id" :href="'#'+data.id">{{index+1+'. '}}{{data.subTitle}}</a>
                 </template>
             </div>
         </header>
 
         <!-- installation -->
         <main id="main-installation">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
                     <pre><code class="language-markup" v-html="codeHtml"></code></pre>
                 </div>
 
-                <a class="linkDocs" :href="documentation" target="_blank">installation docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">installation docs</a>
             </div>
         </main>
         
         <!-- Data and Method -->
         <main id="main-data-and-method">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
                     <pre><code class="language-javascript" v-html="codeJs"></code></pre>
                 </div>
 
-                <a class="linkDocs" :href="documentation" target="_blank">data and method docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">data and method docs</a>
             </div>
         </main>
         
         <!-- Directive -->
         <main id="main-directive">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
                     <pre><code class="language-markup" v-html="codeHtml"></code></pre>
                     <pre><code class="language-javascript" v-html="codeJs"></code></pre>
-                </div>code-wraper
+                </div>
 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
-                    <p v-once>{{ testVOnce }}</p>
-                    <p v-text="testVText"></p>
-                    <p v-html="testVHtml"></p>
+                    <small class="small-text">result</small>
+                    <p class="paragraph" v-once>{{ testVOnce }}</p>
+                    <p class="paragraph" v-text="testVText"></p>
+                    <p class="paragraph" v-html="testVHtml"></p>
                 </div>
-                <a class="linkDocs" :href="documentation" target="_blank">directives docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">directives docs</a>
             </div>
         </main>
 
         <!-- Event Handling -->
         <main id="main-event-handling">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
@@ -89,27 +92,29 @@
                 </div>
                 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
+                    <small class="small-text">result</small>
                     <a href="" @click="warn('be carefull')" style="margin: 10px 0; display: block;">without prevent</a>
                     <a href="" @click.prevent="warn('be carefull')" style="margin: 10px 0 40px 0; display: block;">with prevent</a>
                 </div>
 
-                <pre><code class="language-markup" v-html="codeHtmlB"></code></pre>
-                <pre><code class="language-javascript" v-html="codeJsB"></code></pre>
+                <div class="code-wraper">
+                    <pre><code class="language-markup" v-html="codeHtmlB"></code></pre>
+                    <pre><code class="language-javascript" v-html="codeJsB"></code></pre>
+                </div>
                 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
-                    <p>Author-name: {{ author }}</p>
-                    <p>Author-age : {{ age }}</p>
+                    <small class="small-text">result</small>
+                    <p class="paragraph">Author-name: {{ author }}</p>
+                    <p class="paragraph">Author-age : {{ age }}</p>
                     <button v-on:click="editAuthor()">edit</button>
                 </div>
-                <a class="linkDocs" :href="documentation" target="_blank">event handling docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">event handling docs</a>
             </div>
         </main>
             
         <!-- Two Ways Data Binding -->
         <main id="main-two-ways-data-binding">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
             
             <div class="content-wraper">
                 <div class="code-wraper">
@@ -119,7 +124,7 @@
                 </div>
 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
+                    <small class="small-text">result</small>
                     <div id="tag-wraper" v-html="tagMaker"></div>
                     <label for="angular">
                         <input id="angular" v-model="arrayTag" type="checkbox" value="angular">
@@ -143,7 +148,7 @@
 
         <!-- Computed Property -->
         <main id="main-computed">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
@@ -152,17 +157,17 @@
                 </div>
 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
+                    <small class="small-text">result</small>
                     <input v-model="numVal" type="text">
-                    <p v-html="numCheck"></p>
+                    <p class="paragraph" v-html="numCheck"></p>
                 </div>
-                <a class="linkDocs" :href="documentation" target="_blank">computed property docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">computed property docs</a>
             </div>
         </main>
 
         <!-- Conditional rendering -->
         <main id="main-conditional-rendering">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
@@ -171,7 +176,7 @@
                 </div>
 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
+                    <small class="small-text">result</small>
                     <input type="text" placeholder="type something" v-on:keyup="insertValueDataInput">
                     <b>data type:</b>
                     <span id="span-wraper" v-show="dataInput !== ''">
@@ -182,13 +187,13 @@
                         <span v-else-if="/^\d+$/.test(dataInput)">number</span>
                     </span>
                 </div>
-                <a class="linkDocs" :href="documentation" target="_blank">conditional rendering docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">conditional rendering docs</a>
             </div>
         </main>
 
         <!-- Atribute Binding -->
         <main id="main-atribute-binding">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
@@ -198,20 +203,20 @@
                 </div>
 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
-                    <img id="jumbotron" :src="wallpaper" width="500">
+                    <small class="small-text">result</small>
+                    <img id="jumbotron" :src="wallpaper">
                     <div id="thumbnail-wraper">
-                        <img src="asset/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-                        <img src="asset/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+                        <img src="asset/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
+                        <img src="asset/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
                     </div>
                 </div>
-                <a class="linkDocs" :href="documentation" target="_blank">atribute binding docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">atribute binding docs</a>
             </div>
         </main>
 
         <!-- Looping -->
         <main id="main-looping">
-            <h2 v-bind:id="dataId">{{ subTitle }}</h2>
+            <h1 class="sub-title" v-bind:id="dataId">{{ subTitle }}</h1>
 
             <div class="content-wraper">
                 <div class="code-wraper">
@@ -221,7 +226,7 @@
                 </div>
                 
                 <div class="result-wraper">
-                    <small class="span-result">result</small>
+                    <small class="small-text">result</small>
                     <input type="text" placeholder="press enter to add" @keyup.enter="addItem('enter',$event)">
                     <div id="todo-wraper">
                         <div v-for="(item,i) of itemsTodo" class="itemList">
@@ -233,7 +238,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="linkDocs" :href="documentation" target="_blank">looping docs</a>
+                <a class="link-docs" :href="documentation" target="_blank">looping docs</a>
             </div>
         </main>
 
@@ -247,21 +252,33 @@
         const mainVm = new Vue({
             el: 'header',
             data: {
-                title  : 'Basic Vuejs',
-                logo   : 'asset/vue-logo.svg',
-                allId  : []
+                title : 'learning basic of vuejs',
+                allId : [],
+                logo     : 'asset/vue-logo.svg',
+                currentId: ''
             },
-            // mounted:function(){
-                // this.wOnLoad() //wOnLoad will execute at pageload
-            // },
             methods: {
                 wOnLoad: () => {
-                    return window.addEventListener('load', () => {
+                    window.addEventListener('load',() => {
                         document.querySelector('#loading-page').remove();
                     });
+                },
+                wScrollScheck: (event) => {
+                    window.addEventListener("scroll", function() {
+                        let mainInstallation = document.querySelector('#main-installation');
+                        if(this.scrollY > mainInstallation.offsetTop-200){
+                            document.querySelector('#btn-up').classList.add('show');
+                        }else{
+                            document.querySelector('#btn-up').classList.remove('show');
+                        }
+                    });
                 }
-            }
+            },
         });
+
+        mainVm.wOnLoad();
+        mainVm.wScrollScheck();
+
     </script>
     <script src="1-installation.js"></script>
     <script src="2-data-and-method.js"></script>
