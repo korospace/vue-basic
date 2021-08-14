@@ -180,7 +180,7 @@
                     <input type="text" placeholder="type something" v-on:keyup="insertValueDataInput">
                     <b>data type:</b>
                     <span id="span-wraper" v-show="dataInput !== ''">
-                        <span v-if="/true|false/.test(dataInput)">boolean</span>
+                        <span v-if="/true|false/.test(dataInput.toLowerCase())">boolean</span>
                         <span v-else-if="!/^\d+$/.test(dataInput) && !/[^\w\s]/gi.test(dataInput)">string</span>
                         <span v-else-if="/{/g.test(dataInput) && /}/g.test(dataInput)">object</span>
                         <span v-else-if="/\[/g.test(dataInput) && /\]/g.test(dataInput)">array</span>
