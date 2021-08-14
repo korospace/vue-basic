@@ -234,7 +234,7 @@ header h5{
 }
 @media (max-width: 648px) {
     html,body{
-        padding: 20px;
+        padding: 10px;
     }
     .title{
         font-size: 30px;
