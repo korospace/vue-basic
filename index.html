@@ -15,12 +15,12 @@
 
 </head>
 <body>
+    <section id="loading-page">
+        <img class="pulse" src="asset/vue-logo.svg" width="120px">
+    </section>
 
     <section id="container">
         <header id="header" >
-            <section id="loading-page">
-                <img class="pulse" :src="logo" width="120px">
-            </section>
 
             <a id="btn-up" href="#" @click="currentId=''">up</a>
 
@@ -258,11 +258,6 @@
                 currentId: ''
             },
             methods: {
-                wOnLoad: () => {
-                    window.addEventListener('load',() => {
-                        document.querySelector('#loading-page').remove();
-                    });
-                },
                 wScrollScheck: (event) => {
                     window.addEventListener("scroll", function() {
                         let mainInstallation = document.querySelector('#main-installation');
@@ -276,8 +271,10 @@
             },
         });
 
-        mainVm.wOnLoad();
         mainVm.wScrollScheck();
+        window.addEventListener('load',() => {
+            document.querySelector('#loading-page').remove();
+        });
 
     </script>
     <script src="1-installation.js"></script>
