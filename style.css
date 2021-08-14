@@ -254,6 +254,9 @@ header h5{
     #main-looping .itemList{
         width: 100%;
     }
+    #table-of-content{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     #table-of-content a{
         word-wrap: break-word;
     }
