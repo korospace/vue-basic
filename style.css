@@ -148,75 +148,6 @@ header h5{
     padding: 0px 20px;
 }
 
-/* Conditional rendering */
-#main-conditional-rendering #span-wraper span{
-    padding: 4px 8px;
-    margin-right: 4px;
-    border-radius: 3px;
-    background-color: salmon;
-}
-
-/* Atribute binding */
-#main-atribute-binding #jumbotron{
-    width: 500px;
-}
-#main-atribute-binding #thumbnail-wraper{
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-#main-atribute-binding #thumbnail-wraper img{
-    width: 100px;
-    cursor: pointer;
-    opacity: 0.6;
-    margin-right: 4px;
-}
-#main-atribute-binding #thumbnail-wraper img.clicked{
-    cursor: default;
-    opacity: 1;
-}
-
-/* Two ways data binding */
-#main-two-ways-data-binding #tag-wraper{
-    min-height: 24px;
-    margin: 20px 0 10px 0;
-}
-#main-two-ways-data-binding .tag-span{
-    display: inline-block;
-    background-color: #41B883;
-    margin: 6px 6px 0 0;
-    border-radius: 4px;
-    padding: 4px 8px;
-}
-#main-two-ways-data-binding label{
-    display: inline-block;
-    min-width: 100px;
-    margin-top: 6px;
-}
-
-/* Looping */
-#main-looping .itemList{
-    width: 216px;
-    margin-top: 6px;
-    background-color: #41B883;
-    border-radius: 3px;
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
-#main-looping b.cross{
-    text-decoration: line-through;
-    white-space: pre-wrap;
-}
-#main-looping .btn-wraper{
-    min-width: 28px;
-}
-#main-looping .btn-wraper span{
-    color: red;
-    cursor: pointer;
-}
-
 @media (max-width: 820px) {
     #container{
         padding: 40px 20px;
@@ -224,12 +155,6 @@ header h5{
     .content-wraper{
         padding-left: 20px;
         padding-right: 20px;
-    }
-    #main-atribute-binding #jumbotron{
-        width: 100%;
-    }
-    #main-atribute-binding #thumbnail-wraper img{
-        width: 50%;
     }
 }
 @media (max-width: 648px) {
@@ -250,9 +175,6 @@ header h5{
     }
     .code-wraper{
         font-size: 12px;
-    }
-    #main-looping .itemList{
-        width: 100%;
     }
     #table-of-content{
         grid-template-columns: repeat(2, minmax(0, 1fr));

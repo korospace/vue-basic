@@ -1,6 +1,8 @@
 let codeHtmlA1 = `&lt;!-- html -->
-&lt;a href="" @click="warn('be carefull')">without prevent&lt;/a>
-&lt;a href="" @click.prevent="warn('be carefull')">with prevent&lt;/a>`;
+&lt;div id="myApp">
+    &lt;a href="" @click="warn('be carefull')">without prevent&lt;/a>
+    &lt;a href="" @click.prevent="warn('be carefull')">with prevent&lt;/a>
+&lt/div>`;
 
 let codeJsA1 = `/* js */
 const vm = new Vue({
@@ -13,9 +15,11 @@ const vm = new Vue({
 });`;
 
 let codeHtmlB1 = `&lt;!-- html -->
-&lt;p>Author-name: {{ author }}&lt;/p>
-&lt;p>Author-age : {{ age }}&lt;/p>
-&lt;button v-on:click="editAuthor()">edit&lt;/button>`;
+&lt;div id="myApp">
+    &lt;p>Author-name: {{ author }}&lt;/p>
+    &lt;p>Author-age : {{ age }}&lt;/p>
+    &lt;button v-on:click="editAuthor()">edit&lt;/button>
+&lt;/div>`;
 
 let codeJsB1 = `/* js */
 const vm = new Vue({
@@ -25,11 +29,9 @@ const vm = new Vue({
         age : 22,
     },
     methods : {
-        warn: function(message) {
-            editAuthor : function() {
-                this.author = prompt("new author's name");
-                this.age    = parseInt(prompt("new author's age"));
-            },
+        editAuthor : function() {
+            this.author = prompt("new author's name");
+            this.age    = parseInt(prompt("new author's age"));
         }
     },
 });`;

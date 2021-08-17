@@ -1,6 +1,8 @@
 let codeHtml6 = `&lt;!-- html -->
-&lt;input v-model="numVal" type="text">
-&lt;p v-html="numCheck">&lt;/p>`;
+&lt;div id="myApp">
+    &lt;input v-model="numVal" type="text">
+    &lt;p v-html="numCheck">&lt;/p>
+&lt;/div>`;
 
 let codeJs6 = `/* js */
 const vm = new Vue({

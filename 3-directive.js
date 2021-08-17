@@ -1,7 +1,9 @@
 let codeHtml3 = `&lt;!-- html -->
-&lt;p v-once>{{ testVOnce }}&lt;/p>
-&lt;p v-text="testVText">&lt;/p>
-&lt;p v-html="testVHtml">&lt;/p>`;
+&lt;div id="myApp">
+    &lt;p v-once>{{ testVOnce }}&lt;/p>
+    &lt;p v-text="testVText">&lt;/p>
+    &lt;p v-html="testVHtml">&lt;/p>
+&lt/div>`;
 
 let codeJs3 = `/* js */
 const vm = new Vue({

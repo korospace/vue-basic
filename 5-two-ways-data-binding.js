@@ -1,22 +1,24 @@
 let codeHtml5 = `&lt;!-- html -->
-&lt;div id="tag-wraper" v-html="tagMaker">&lt;/div>
+&lt;div id="myApp">
+    &lt;div id="tag-wraper" v-html="tagMaker">&lt;/div>
 
-&lt;label for="angular">
-    &lt;input id="angular" v-model="arrayTag" type="checkbox" value="angular">
-    angular
-&lt;/label>
-&lt;label for="react">
-    &lt;input id="react" v-model="arrayTag" type="checkbox" value="react">
-    react
-&lt;/label>
-&lt;label for="vue">
-    &lt;input id="vue" v-model="arrayTag" type="checkbox" value="vue">
-    vue
-&lt;/label>
-&lt;label for="tailwind">
-    &lt;input id="tailwind" v-model="arrayTag" type="checkbox" value="tailwind">
-    tailwind
-&lt;/label>`;
+    &lt;label for="angular">
+        &lt;input id="angular" v-model="arrayTag" type="checkbox" value="angular">
+        angular
+    &lt;/label>
+    &lt;label for="react">
+        &lt;input id="react" v-model="arrayTag" type="checkbox" value="react">
+        react
+    &lt;/label>
+    &lt;label for="vue">
+        &lt;input id="vue" v-model="arrayTag" type="checkbox" value="vue">
+        vue
+    &lt;/label>
+    &lt;label for="tailwind">
+        &lt;input id="tailwind" v-model="arrayTag" type="checkbox" value="tailwind">
+        tailwind
+    &lt;/label>
+&lt;/div>`;
 
 let codeJs5 = `/* js */
 const vm = new Vue({
@@ -28,7 +30,7 @@ const vm = new Vue({
         tagMaker : function() {
             let el = '';
             this.arrayTag.forEach(e => {
-                el += \`&lt;span class="tag">\${e}&lt;/span>\`;
+                el += \`&lt;span class="tag-span">\${e}&lt;/span>\`;
             });
             return el;
         }
@@ -36,11 +38,11 @@ const vm = new Vue({
 });`;
 
 let codeCss5 = `/* css */
-#main-two-ways-data-binding #tag-wraper{
+#tag-wraper{
     min-height: 24px;
     margin: 20px 0;
 }
-#main-two-ways-data-binding .tag-span{
+.tag-span{
     background-color: #41B883;
     margin-right: 6px;
     border-radius: 4px;

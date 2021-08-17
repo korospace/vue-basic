@@ -1,11 +1,13 @@
 let codeHtml9 = `&lt;!-- html -->
-&lt;input @keyup.enter="addItem('enter',$event)" type="text" placeholder="press enter to add">
-&lt;div id="todo-wraper">
-    &lt;div v-for="(item,i) of itemsTodo" class="itemList">
-        &lt;b :class="{cross: crossCheck(item)}">{{ i+1 }}. {{ item }}&lt;/b>
-        &lt;div class="btn-wraper">
-            &lt;input :value="item" @click="addCrossItem" type="checkbox" :checked="(crossCheck(item)) ? 'checked' : ''">
-            &lt;span :data-value="item" @click="deleteItem">x&lt;/span>
+&lt;div id="myApp">
+    &lt;input @keyup.enter="addItem('enter',$event)" type="text" placeholder="press enter to add">
+    &lt;div id="todo-wraper">
+        &lt;div v-for="(item,i) of itemsTodo" class="itemList">
+            &lt;b :class="{cross: crossCheck(item)}">{{ i+1 }}. {{ item }}&lt;/b>
+            &lt;div class="btn-wraper">
+                &lt;input :value="item" @click="addCrossItem" type="checkbox" :checked="(crossCheck(item)) ? 'checked' : ''">
+                &lt;span :data-value="item" @click="deleteItem">x&lt;/span>
+            &lt;/div>
         &lt;/div>
     &lt;/div>
 &lt;/div>`;
@@ -55,7 +57,7 @@ const vm = new Vue({
 });`;
 
 let codeCss9 = `/* css */
-#main-looping .itemList{
+.itemList{
     width: 205px;
     margin-top: 6px;
     background-color: #41B883;
@@ -64,14 +66,14 @@ let codeCss9 = `/* css */
     display: flex;
     justify-content: space-between;
 }
-#main-looping b.cross{
+b.cross{
     text-decoration: line-through;
     white-space: pre-wrap;
 }
-#main-looping .btn-wraper{
+.btn-wraper{
     min-width: 28px;
 }
-#main-looping .btn-wraper span{
+.btn-wraper span{
     color: red;
     cursor: pointer;
 }`;

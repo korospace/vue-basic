@@ -1,0 +1,18 @@
+
+/* Two ways data binding */
+#main-two-ways-data-binding #tag-wraper{
+    min-height: 24px;
+    margin: 20px 0 10px 0;
+}
+#main-two-ways-data-binding .tag-span{
+    display: inline-block;
+    background-color: #41B883;
+    margin: 6px 6px 0 0;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+#main-two-ways-data-binding label{
+    display: inline-block;
+    min-width: 100px;
+    margin-top: 6px;
+}

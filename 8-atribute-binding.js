@@ -1,13 +1,15 @@
 let codeHtml8 = `&lt;!-- html -->
-&lt;img id="jumbotron" :src="wallpaper" width="500">
-&lt;div id="thumbnail-wraper">
-    &lt;img src="asset/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-    &lt;img src="asset/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+&lt;div id="myApp">
+    &lt;img id="jumbotron" :src="wallpaper" width="500">
+    &lt;div id="thumbnail-wraper">
+        &lt;img src="asset/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
+        &lt;img src="asset/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+    &lt;/div>
 &lt;/div>`;
 
 let codeJs8 = `/* js */
 const vm = new Vue({
-    el   : '#main-atribute-binding', 
+    el   : '#myApp', 
     data : {
         wallpaper: 'asset/vuewallpaper1.jpeg',
     },
@@ -23,18 +25,21 @@ const vm = new Vue({
 });`;
 
 let codeCss8 = `/* css */
-#main-atribute-binding #thumbnail-wraper{
+#jumbotron{
+    width: 500px;
+}
+#thumbnail-wraper{
     display: flex;
     align-items: center;
     margin-top: 10px;
     height: 60px;
 }
-#main-atribute-binding #thumbnail-wraper img{
+#thumbnail-wraper img{
     cursor: pointer;
     opacity: 0.7;
     margin-left: 4px;
 }
-#main-atribute-binding #thumbnail-wraper img.clicked{
+#thumbnail-wraper img.clicked{
     cursor: default;
     opacity: 1;
     transform: scale(0.9);

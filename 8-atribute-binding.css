@@ -1,0 +1,28 @@
+/* Atribute binding */
+#main-atribute-binding #jumbotron{
+    width: 500px;
+}
+#main-atribute-binding #thumbnail-wraper{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#main-atribute-binding #thumbnail-wraper img{
+    width: 100px;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-right: 4px;
+}
+#main-atribute-binding #thumbnail-wraper img.clicked{
+    cursor: default;
+    opacity: 1;
+}
+
+@media (max-width: 820px) {
+    #main-atribute-binding #jumbotron{
+        width: 100%;
+    }
+    #main-atribute-binding #thumbnail-wraper img{
+        width: 50%;
+    }
+}

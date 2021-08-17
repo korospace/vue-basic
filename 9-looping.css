@@ -1,0 +1,28 @@
+/* Looping */
+#main-looping .itemList{
+    width: 216px;
+    margin-top: 6px;
+    background-color: #41B883;
+    border-radius: 3px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+#main-looping b.cross{
+    text-decoration: line-through;
+    white-space: pre-wrap;
+}
+#main-looping .btn-wraper{
+    min-width: 28px;
+}
+#main-looping .btn-wraper span{
+    color: red;
+    cursor: pointer;
+}
+
+@media (max-width: 648px) {
+    #main-looping .itemList{
+        width: 100%;
+    }
+}
