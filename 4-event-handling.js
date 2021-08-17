@@ -64,4 +64,4 @@ const vm4 = new Vue({
     },
 });
 
-mainVm.allId.push({id:vm4.dataId,subTitle:vm4.subTitle});
+headerVm.allSubTitle.push(vm4.subTitle);

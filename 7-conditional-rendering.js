@@ -27,7 +27,6 @@ const vm = new Vue({
 const vm7 = new Vue({
     el   : '#main-conditional-rendering',
     data : {
-        dataId    : 'conditional-rendering',
         subTitle  : 'conditional rendering',
         dataInput : '',
         codeHtml  : codeHtml7,
@@ -41,4 +40,4 @@ const vm7 = new Vue({
     }
 });
 
-mainVm.allId.push({id:vm7.dataId,subTitle:vm7.subTitle});
+headerVm.allSubTitle.push(vm7.subTitle);

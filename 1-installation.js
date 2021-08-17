@@ -14,11 +14,10 @@ let codeHtml1 = `&lt;html>
 const vm1 = new Vue({
     el   : '#main-installation',
     data : {
-        dataId   : 'installation',
         subTitle : 'installation',
         codeHtml : codeHtml1,
         documentation : 'https://vuejs.org/v2/guide/installation.html#CDN',
     },
 });
 
-mainVm.allId.push({id:vm1.dataId,subTitle:vm1.subTitle});
+headerVm.allSubTitle.push(vm1.subTitle);

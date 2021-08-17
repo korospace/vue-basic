@@ -48,7 +48,6 @@ let codeCss8 = `/* css */
 const vm8 = new Vue({
     el   : '#main-atribute-binding',
     data : {
-        dataId    : 'atribute-binding',
         subTitle  : 'atribute binding',
         wallpaper: 'asset/vuewallpaper1.jpeg',
         codeHtml  : codeHtml8,
@@ -67,4 +66,4 @@ const vm8 = new Vue({
     },
 });
 
-mainVm.allId.push({id:vm8.dataId,subTitle:vm8.subTitle});
+headerVm.allSubTitle.push(vm8.subTitle);

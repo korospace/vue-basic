@@ -81,7 +81,6 @@ b.cross{
 const vm9 = new Vue({
     el   : '#main-looping', 
     data : {
-        dataId    : 'looping',
         subTitle  : 'looping',
         itemsTodo : ['learning vue','hunting job'],
         crossItem : ['learning vue'],
@@ -127,4 +126,4 @@ const vm9 = new Vue({
     }
 });
 
-mainVm.allId.push({id:vm9.dataId,subTitle:vm9.subTitle});
+headerVm.allSubTitle.push(vm9.subTitle);

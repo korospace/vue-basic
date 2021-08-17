@@ -52,7 +52,6 @@ let codeCss5 = `/* css */
 const vm5 = new Vue({
     el   : '#main-two-ways-data-binding', 
     data : {
-        dataId    : 'two-ways-data-binding',
         subTitle  : 'two ways data binding',
         arrayTag  : [],
         codeHtml  : codeHtml5,
@@ -71,4 +70,4 @@ const vm5 = new Vue({
     }
 });
 
-mainVm.allId.push({id:vm5.dataId,subTitle:vm5.subTitle});
+headerVm.allSubTitle.push(vm5.subTitle);

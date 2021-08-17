@@ -37,7 +37,6 @@ const vm = new Vue({
 const vm6 = new Vue({
     el   : '#main-computed', //root component
     data : {
-        dataId   : 'computed-property',
         subTitle : 'computed property',
         numVal   : '',
         codeHtml : codeHtml6,
@@ -47,10 +46,10 @@ const vm6 = new Vue({
     computed: {
         numCheck : function() {
             if(this.numVal === ""){
-                return '<span style="color:red;font-style:italic;">*please, insert number</span>';
+                return '<span class="danger">*please, insert number</span>';
             }
             else if(!/^\d+$/.test(this.numVal)){
-                return '<span style="color:red;font-style:italic;">*only number allowed</span>';
+                return '<span class="danger">*only number allowed</span>';
             }
             else{
                 let message = "";
@@ -60,10 +59,10 @@ const vm6 = new Vue({
                 else{
                     message = "this is an 'odd' number";
                 }
-                return `<span style="color:green;">${message}</span>`;
+                return `<span class="success">${message}</span>`;
             }
         }
     }
 });
 
-mainVm.allId.push({id:vm6.dataId,subTitle:vm6.subTitle});
+headerVm.allSubTitle.push(vm6.subTitle);

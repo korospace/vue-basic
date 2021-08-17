@@ -21,7 +21,6 @@ vm.testVOnce = "edit variable testVOnce";`;
 const vm3 = new Vue({
     el   : '#main-directive',
     data : {
-        dataId    : 'directive',
         subTitle  : 'directive',
         testVOnce : 'this is an unalterable text',
         testVText : '<span style="color:red;">like innerText</span>',
@@ -35,4 +34,4 @@ const vm3 = new Vue({
 // v-once atribute make your value is unalterable
 vm3.testVOnce = "edit variable testVOnce";
 
-mainVm.allId.push({id:vm3.dataId,subTitle:vm3.subTitle});
+headerVm.allSubTitle.push(vm3.subTitle);
