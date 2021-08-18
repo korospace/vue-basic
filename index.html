@@ -9,12 +9,6 @@
     <link rel="shortcut icon" href="asset/vue-logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="asset/prism.css">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="5-two-ways-data-binding.css">
-    <link rel="stylesheet" href="6-computed-property.css">
-    <link rel="stylesheet" href="7-conditional-rendering.css">
-    <link rel="stylesheet" href="8-atribute-binding.css">
-    <link rel="stylesheet" href="9-looping.css">
-    <link rel="stylesheet" href="10-basic-component.css">
 
 </head>
 <body>
@@ -22,228 +16,31 @@
         <img class="pulse" src="asset/vue-logo.svg" width="120px">
     </section>
 
-    <section id="container">
-        <header id="header">
+    <section id="app">
+        
+        <!-- header -->
+        <header>
             <a id="btn-up" href="#" @click="currentId=''">up</a>
 
             <img :src="logo" width="120px">
             <h1 class="title">{{ title }}</h1>
 
             <div id="table-of-content">
-                <template v-for="(st,index) of allSubTitle">
-                    <a :class="{hrefSub:true,clicked:currentId == subTitleParse(st)}" @click="currentId=subTitleParse(st)" :href="'#'+subTitleParse(st)">{{index+1+'. '}}{{st}}</a>
+                <template v-for="(m,i) of allMain">
+                    <a 
+                      :class="{hrefSub:true,clicked:currentId == subTitleDash(m.subTitle)}" 
+                      :href="'#'+subTitleDash(m.subTitle)"
+                      @click="currentId=subTitleDash(m.subTitle)">
+                        {{i+1+'. '}}{{m.subTitle}}
+                    </a>
                 </template>
             </div>
         </header>
 
-        <!-- installation -->
-        <main id="main-installation">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-        
-        <!-- Data and Method -->
-        <main id="main-data-and-method">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="js" :code="codeJs"></thecode>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-        
-        <!-- Directive -->
-        <main id="main-directive">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <p class="paragraph" v-once>{{ testVOnce }}</p>
-                    <p class="paragraph" v-text="testVText"></p>
-                    <p class="paragraph" v-html="testVHtml"></p>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-
-        <!-- Event Handling -->
-        <main id="main-event-handling">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtmlA"></thecode>
-                <thecode lang="js" :code="codeJsA"></thecode>
-                
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <a href="" @click="warn('be carefull')" style="margin: 10px 0; display: block;">without prevent</a>
-                    <a href="" @click.prevent="warn('be carefull')" style="margin: 10px 0 40px 0; display: block;">with prevent</a>
-                </div>
-
-                <div class="code-wraper">
-                    <thecode lang="html" :code="codeHtmlB"></thecode>
-                    <thecode lang="js" :code="codeJsB"></thecode>
-                </div>
-                
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <p class="paragraph">Author-name: {{ author }}</p>
-                    <p class="paragraph">Author-age : {{ age }}</p>
-                    <button v-on:click="editAuthor()">edit</button>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-            
-        <!-- Two Ways Data Binding -->
-        <main id="main-two-ways-data-binding">
-            <sub-title :subtitle="subTitle"></sub-title>
-            
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-                <thecode lang="css" :code="codeCss"></thecode>
-
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <div id="tag-wraper" v-html="tagMaker"></div>
-                    <label for="angular">
-                        <input id="angular" v-model="arrayTag" type="checkbox" value="angular">
-                        angular
-                    </label>
-                    <label for="react">
-                        <input id="react" v-model="arrayTag" type="checkbox" value="react">
-                        react
-                    </label>
-                    <label for="vue">
-                        <input id="vue" v-model="arrayTag" type="checkbox" value="vue">
-                        vue
-                    </label>
-                    <label for="tailwind">
-                        <input id="tailwind" v-model="arrayTag" type="checkbox" value="tailwind">
-                        tailwind
-                    </label>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-
-        <!-- Computed Property -->
-        <main id="main-computed">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <input v-model="numVal" type="text">
-                    <p class="paragraph" v-html="numCheck"></p>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-
-        <!-- Conditional rendering -->
-        <main id="main-conditional-rendering">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <input type="text" placeholder="type something" v-on:keyup="insertValueDataInput">
-                    <b>data type:</b>
-                    <span id="span-wraper" v-show="dataInput !== ''">
-                        <span v-if="/true|false/.test(dataInput.toLowerCase())">boolean</span>
-                        <span v-else-if="!/^\d+$/.test(dataInput) && !/[^\w\s]/gi.test(dataInput)">string</span>
-                        <span v-else-if="/{/g.test(dataInput) && /}/g.test(dataInput)">object</span>
-                        <span v-else-if="/\[/g.test(dataInput) && /\]/g.test(dataInput)">array</span>
-                        <span v-else-if="/^\d+$/.test(dataInput)">number</span>
-                    </span>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-
-        <!-- Atribute Binding -->
-        <main id="main-atribute-binding">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-                <thecode lang="css" :code="codeCss"></thecode>
-
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-                    <img id="jumbotron" :src="wallpaper">
-                    <div id="thumbnail-wraper">
-                        <img src="asset/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-                        <img src="asset/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
-                    </div>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-
-        <!-- Looping -->
-        <main id="main-looping">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-                <thecode lang="css" :code="codeCss"></thecode>
-                
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-
-                    <input type="text" placeholder="press enter to add" @keyup.enter="addItem('enter',$event)">
-                    <div id="todo-wraper">
-                        <div v-for="(item,i) of itemsTodo" class="itemList">
-                            <b :class="{cross: crossCheck(item)}">{{ i+1 }}. {{ item }}</b>
-                            <div class="btn-wraper">
-                                <input :value="item" @click="addCrossItem" type="checkbox" :checked="(crossCheck(item)) ? 'checked' : ''">
-                                <span :data-value="item" @click="deleteItem">x</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <linkdocs :link="documentation" :subtitle="subTitle"></linkdocs>
-            </div>
-        </main>
-
-        <!-- Component -->
-        <main id="main-component">
-            <sub-title :subtitle="subTitle"></sub-title>
-
-            <div class="content-wraper">
-                <thecode lang="html" :code="codeHtml"></thecode>
-                <thecode lang="js" :code="codeJs"></thecode>
-                <thecode lang="css" :code="codeCss"></thecode>
-
-                <div class="result-wraper">
-                    <small class="small-text">result</small>
-
-                    <btn-onoff></btn-onoff>
-                    <btn-onoff></btn-onoff>
-                    <btn-onoff></btn-onoff>
-
-                </div>
-            </div>
-        </main>
+        <!-- content -->
+        <template v-for="m of allMain">
+            <x-main :objmain="m"></x-main>
+        </template>
 
     </section>
 
@@ -251,16 +48,20 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="asset/prism.js"></script>
     <script src="index.js"></script>
-    <script src="1-installation.js"></script>
-    <script src="2-data-and-method.js"></script>
-    <script src="3-directive.js"></script>
-    <script src="4-event-handling.js"></script>
-    <script src="5-two-ways-data-binding.js"></script>
-    <script src="6-computed-property.js"></script>
-    <script src="7-conditional-rendering.js"></script>
-    <script src="8-atribute-binding.js"></script>
-    <script src="9-looping.js"></script>
-    <script src="10-basic-component.js"></script>
+    <script>
+        window.addEventListener('load',() => {
+            document.querySelector('#loading-page').classList.add('hide');
+        });
+
+        window.addEventListener("scroll", function() {
+            let mainInstallation = document.querySelector('#installation');
+            if(this.scrollY > mainInstallation.offsetTop-200){
+                document.querySelector('#btn-up').classList.add('show');
+            }else{
+                document.querySelector('#btn-up').classList.remove('show');
+            }
+        });
+    </script>
    
 </body>
 </html>
