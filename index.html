@@ -12,16 +12,11 @@
 
 </head>
 <body>
-    <section id="loading-page">
-        <img class="pulse" src="asset/vue-logo.svg" width="120px">
-    </section>
-
     <section id="app">
+        <x-btnup></x-btnup>
         
         <!-- header -->
         <header>
-            <a id="btn-up" href="#" @click="currentId=''">up</a>
-
             <img :src="logo" width="120px">
             <h1 class="title">{{ title }}</h1>
 
@@ -48,20 +43,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="asset/prism.js"></script>
     <script src="index.js"></script>
-    <script>
-        window.addEventListener('load',() => {
-            document.querySelector('#loading-page').classList.add('hide');
-        });
-
-        window.addEventListener("scroll", function() {
-            let mainInstallation = document.querySelector('#installation');
-            if(this.scrollY > mainInstallation.offsetTop-200){
-                document.querySelector('#btn-up').classList.add('show');
-            }else{
-                document.querySelector('#btn-up').classList.remove('show');
-            }
-        });
-    </script>
    
 </body>
 </html>

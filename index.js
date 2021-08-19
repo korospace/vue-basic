@@ -1,4 +1,19 @@
 
+// X-BTNUP
+Vue.component('x-btnup', {
+    data() {
+        return {
+          scrollpx: 0
+        };
+    },
+    created() {
+      window.addEventListener('scroll', () => {
+        this.scrollpx = window.scrollY;
+      });
+    },
+    template: `<a id="btn-up" href="#" :class="{show: scrollpx > 100}">up</a>`
+})
+
 // X-SUBTITLE
 Vue.component('x-subtitle', {
     props: ['subtitle'],
@@ -249,7 +264,7 @@ const vm = new Vue({
 
 let content4 = `<p class="paragraph">Author-name: {{ author }}</p>
 <p class="paragraph">Author-age : {{ age }}</p>
-<button class="btn-green" v-on:click="editAuthor()">edit</button>`;
+<button class="btn-green" @click="editAuthor()">edit</button>`;
 
 vm.allMain.push({
     subTitle : 'event handling',
