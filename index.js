@@ -1,40 +1,51 @@
+// X-HEADER
+let xheader = {
+    props: ['title','logo'],
+    template: `<header>
+        <img :src="logo" width="120px">
+        <h1 class="title">{{ title }}</h1>
+    </header>`
+}
 
-// X-BTNUP
-Vue.component('x-btnup', {
+// X-TOC
+let xtoc = {
+    props: ['objmain','currentid'],
     data() {
         return {
           scrollpx: 0
         };
     },
-    created() {
-      window.addEventListener('scroll', () => {
-        this.scrollpx = window.scrollY;
-      });
-    },
-    template: `<a id="btn-up" href="#" :class="{show: scrollpx > 100}">up</a>`
-})
-
-// X-SUBTITLE
-Vue.component('x-subtitle', {
-    props: ['subtitle'],
     methods: {
         subTitleDash: (data) => {
             return data.replace(/ /g,'-');
-        }
+        },
     },
-    template: `<h1 class="sub-title" :id="subTitleDash(subtitle)">{{ subtitle }}</h1>`
-})
+    created() {
+      window.addEventListener('scroll', () => {
+        this.scrollpx = window.scrollY
+      });
+    },
+    template: `<div class="table-of-content">
+        <a id="btn-up" href="#" :class="{show: scrollpx > 100}" @click="currentid = ''">up</a>
+        <template v-for="(obj,i) of objmain">    
+            <a 
+            :class="{hrefSub:true,clicked:currentid == subTitleDash(obj.subTitle)}" 
+            :href="'#'+subTitleDash(obj.subTitle)"
+            @click="currentid=subTitleDash(obj.subTitle)"
+            >
+                {{i+1+'. '}}{{obj.subTitle}}
+            </a>
+        </template>
+    </div>`
+}
 
-// X-DOCS
-Vue.component('x-docs', {
-    props: ['link','subtitle'],
-    template: `<a class="link-docs" target="_blank" :href="link">{{subtitle+' docs'}}</a>`
-})
-
-// X-CODE
-Vue.component('x-code', {
-    props: ['lang','code'],
+// X-MAIN
+let xallmain = {
+    props: ['objmain'],
     methods: {
+        subTitleDash: (data) => {
+            return data.replace(/ /g,'-');
+        },
         copyCode: function(code,event){
             event.target.nextElementSibling.innerHTML = code.replace(/&lt;/g,'<');
             event.target.nextElementSibling.select();
@@ -45,113 +56,55 @@ Vue.component('x-code', {
             }, 1200);
         }
     },
-    template: `<div class="code-wraper" v-if="code!==''">
-        <div :class="{'btn-copy':true}" @click="copyCode(code,$event)">copy</div>
-        <textarea class="temp-textarea"></textarea>
-        <pre v-if="lang == 'html'"><code v-html="code" class="language-markup"></code></pre>
-        <pre v-if="lang == 'js'"><code v-html="code" class="language-javascript"></code></pre>
-        <pre v-if="lang == 'css'"><code v-html="code" class="language-css"></code></pre>
+    template: `<div>
+        <template v-for="obj of objmain">
+            <main>
+                <h1 class="sub-title" :id="subTitleDash(obj.subTitle)">{{ obj.subTitle }}</h1>
+
+                <div class="code-wraper" v-if="obj.codeHtml !== ''">
+                    <div :class="{'btn-copy':true}" @click="copyCode(obj.codeHtml,$event)">copy</div>
+                    <textarea class="temp-textarea"></textarea>
+                    <pre><code v-html="obj.codeHtml" class="language-markup"></code></pre>
+                </div>
+                <div class="code-wraper" v-if="obj.codeJs !== ''">
+                    <div :class="{'btn-copy':true}" @click="copyCode(obj.codeJs,$event)">copy</div>
+                    <textarea class="temp-textarea"></textarea>
+                    <pre><code v-html="obj.codeJs" class="language-javascript"></code></pre>
+                </div>
+                <div class="code-wraper" v-if="obj.codeCss !== ''">
+                    <div :class="{'btn-copy':true}" @click="copyCode(obj.codeCss,$event)">copy</div>
+                    <textarea class="temp-textarea"></textarea>
+                    <pre><code v-html="obj.codeCss" class="language-css"></code></pre>
+                </div>
+                
+                <div class="result-wraper" v-if="obj.content!==''">
+                    <small class="small-text">result</small>
+                    <span v-html="obj.content"></span>
+                </div>
+
+                <a class="link-docs" target="_blank" :href="obj.linkdocs">{{obj.subTitle+' docs'}}</a>
+            </main>
+        </template>
     </div>`        
-})
+}
 
-// X-MAIN
-Vue.component('x-main', {
-    props: ['objmain'],
-    methods: {
-        subTitleDash: (data) => {
-            return data.replace(/ /g,'-');
-        },
-        insertHtml  : (data,selector) => {
-            console.log(document.querySelector('span.'+selector.replace(/ /g,'-')));
-            // document.querySelector('#'+selector.replace(/ /g,'-')).innerHTML = data;
-        }
+const vmVueBasic = new Vue({
+    el: '#app-vue-basic',
+    components: {
+        'x-header'  : xheader,
+        'x-toc'     : xtoc,
+        'x-allmain' : xallmain,
     },
-    template: `<main>
-    <x-subtitle :subtitle="objmain.subTitle"></x-subtitle>
-
-    <x-code lang="html" :code="objmain.codeHtml"></x-code>
-    <x-code lang="js" :code="objmain.codeJs"></x-code>
-    <x-code lang="css" :code="objmain.codeCss"></x-code>
-    
-    <div class="result-wraper" v-if="objmain.content!==''">
-        <small class="small-text">result</small>
-        <span v-html="objmain.content"></span>
-    </div>
-    <x-docs :link="objmain.linkdocs" :subtitle="objmain.subTitle"></x-docs>
-</main>`        
-})
-
-const vm = new Vue({
-    el: '#app',
     data: {
-        logo      : 'asset/vue-logo.svg',
-        title     : 'learning basic of vuejs',
+        hTitle    : 'learning basic of vuejs',
+        imgLogo   : 'asset/vue-logo.svg',
         currentId : '',
         allMain   : [],
-        // 3-directive
-        testVOnce : 'this is an unalterable text',
-        testVText : '<span style="color:red;">like innerText</span>',
-        testVHtml : '<span style="color:red;">like innerHTML</span>',
-        // 4-event-handling
-        age       : 22,
-        author    : 'korospace',
-        // 6-two-ways-data-binding
-        arrayTag  : [],
-        // 7-computed-property
-        numVal   : '',
-        // 8-conditional-rendering
-        dataInput : '',
     },
     methods: {
         subTitleDash: (data) => {
             return data.replace(/ /g,'-');
         },
-        // 4-event-handling
-        editAuthor : function() {
-            this.author  = prompt("new author's name");
-            if(this.author === "" || this.author === null){
-                this.author  = 'korospace';
-                return alert('insert something!');
-            }
-            this.age  = parseInt(prompt("new author's age"));
-        },
-        // 5-event-modifier
-        warn: function(message) {
-            alert(message);
-        },
-        // 6-two-ways-data-binding
-        tagMaker : function() {
-            let el = '';
-            this.arrayTag.forEach(e => {
-                el += `<span class="tag-span">${e}</span>`;
-            });
-            return el;
-        },
-        // 8-conditional-rendering
-        insertValueDataInput : function(event) {
-            this.dataInput = event.target.value;
-        }
-    },
-    computed: {
-        // 7-computed-property
-        numCheck : function() {
-            if(this.numVal === ""){
-                return '<span class="danger">*please, insert number</span>';
-            }
-            else if(!/^\d+$/.test(this.numVal)){
-                return '<span class="danger">*only number allowed</span>';
-            }
-            else{
-                let message = "";
-                if(this.numVal%2===0){
-                    message = "this is an 'even' number";
-                }
-                else{
-                    message = "this is an 'odd' number";
-                }
-                return `<span class="success">${message}</span>`;
-            }
-        }
     }
 });
 
@@ -170,7 +123,7 @@ let codeHtml1 = `&lt;!-- html -->
 &lt;/body>
 &lt;/html>`
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'installation',
     codeHtml : codeHtml1,
     codeJs   : '',
@@ -196,7 +149,7 @@ const vm = new Vue({
 console.log( vm.myName ); // Abdullah
 vm.showName("Ibrahim");   // Hi, my name is Ibrahim`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'data and method',
     codeHtml : '',
     codeJs   : codeJs2,
@@ -226,11 +179,9 @@ const vm = new Vue({
 // v-once atribute make your value is unalterable
 vm.testVOnce = "edit variable testVOnce";`;
 
-let content3 = `<p class="paragraph" v-once>{{ testVOnce }}</p>
-<p class="paragraph" v-text="testVText"></p>
-<p class="paragraph" v-html="testVHtml"></p>`;
+let content3 = `<img class="result" src="asset/result/3-directive.png">`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'directive',
     codeHtml : codeHtml3,
     codeJs   : codeJs3,
@@ -262,11 +213,12 @@ const vm = new Vue({
     },
 })`;
 
-let content4 = `<p class="paragraph">Author-name: {{ author }}</p>
-<p class="paragraph">Author-age : {{ age }}</p>
-<button class="btn-green" @click="editAuthor()">edit</button>`;
+let content4 = ` <video class="result" controls>
+    <source src="asset/result/4-event-handling.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video> `;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'event handling',
     codeHtml : codeHtml4,
     codeJs   : codeJs4,
@@ -292,10 +244,12 @@ const vm = new Vue({
     },
 });`;
 
-let content5 = `<a href="" @click="warn('be carefull')" style="margin: 10px 0; display: block;">without prevent</a>
-<a href="" @click.prevent="warn('be carefull')" style="margin: 10px 0 40px 0; display: block;">with prevent</a>`;
+let content5 = `<video class="result" controls>
+    <source src="asset/result/5-event-modifier.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'event modifier',
     codeHtml : codeHtml5,
     codeJs   : codeJs5,
@@ -348,17 +302,12 @@ let codeCss6 = `/* css */
     padding: 4px 8px;
 }`;
 
-let content6 = `<div id="tag-wraper" v-html="tagMaker"></div>
-<label for="react">
-    <input id="react" v-model="arrayTag" type="checkbox" value="react">
-    react
-</label>
-<label for="vue">
-    <input id="vue" v-model="arrayTag" type="checkbox" value="vue">
-    vue
-</label>`;
+let content6 = `<video class="result" controls>
+    <source src="asset/result/6-two-ways-data-binding.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'two ways data binding',
     codeHtml : codeHtml6,
     codeJs   : codeJs6,
@@ -404,10 +353,12 @@ const vm = new Vue({
     }
 });`;
 
-let content7 = `<input class="input-green" v-model="numVal" type="text">
-<p v-html="numCheck"></p>`;
+let content7 = `<video class="result" controls>
+    <source src="asset/result/7-computed-property.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'computed property',
     codeHtml : codeHtml7,
     codeJs   : codeJs7,
@@ -443,17 +394,12 @@ const vm = new Vue({
     }
 });`;
 
-let content8 = `<input class="input-green" type="text" placeholder="type something" v-on:keyup="insertValueDataInput"><br><br>
-<b>data type:</b>
-<span id="span-wraper" v-show="dataInput !== ''">
-    <span v-if="/true|false/.test(dataInput)">boolean</span>
-    <span v-else-if="!/^\d+$/.test(dataInput) && !/[^\w\s]/gi.test(dataInput)">string</span>
-    <span v-else-if="/{/g.test(dataInput) && /}/g.test(dataInput)">object</span>
-    <span v-else-if="/\[/g.test(dataInput) && /\]/g.test(dataInput)">array</span>
-    <span v-else-if="/^\d+$/.test(dataInput)">number</span>
-</span>`;
+let content8 = `<video class="result" controls>
+    <source src="asset/result/8-conditional-rendering.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'conditional rendering',
     codeHtml : codeHtml8,
     codeJs   : codeJs8,
@@ -510,13 +456,12 @@ let codeCss9 = `/* css */
     transform: scale(0.9);
 }`;
 
-let content9 = `<img id="jumbotron" :src="wallpaper" width="500">
-<div id="thumbnail-wraper">
-    <img src="asset/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-    <img src="asset/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
-</div>`;
+let content9 = `<video class="result" controls>
+    <source src="asset/result/9-attribute-binding.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'attribute binding',
     codeHtml : codeHtml9,
     codeJs   : codeJs9,
@@ -606,18 +551,12 @@ b.cross{
     cursor: pointer;
 }`;
 
-let content10 = `<input class="input-green" @keyup.enter="addItem('enter',$event)" type="text" placeholder="press enter to add">
-<div id="todo-wraper">
-    <div v-for="(item,i) of itemsTodo" class="itemList">
-        <b :class="{cross: crossCheck(item)}">{{ i+1 }}. {{ item }}</b>
-        <div class="btn-wraper">
-            <input :value="item" @click="addCrossItem" type="checkbox" :checked="(crossCheck(item)) ? 'checked' : ''">
-            <span :data-value="item" @click="deleteItem">x</span>
-        </div>
-    </div>
-</div>`;
+let content10 = `<video class="result" controls>
+    <source src="asset/result/10-looping.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
 
-vm.allMain.push({
+vmVueBasic.allMain.push({
     subTitle : 'looping',
     codeHtml : codeHtml10,
     codeJs   : codeJs10,

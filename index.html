@@ -12,34 +12,27 @@
 
 </head>
 <body>
-    <section id="app">
-        <x-btnup></x-btnup>
-        
-        <!-- header -->
-        <header>
-            <img :src="logo" width="120px">
-            <h1 class="title">{{ title }}</h1>
+    <section id="loading-page">
+        <img class="pulse" src="asset/vue-logo.svg" width="120px">
+    </section>
 
-            <div id="table-of-content">
-                <template v-for="(m,i) of allMain">
-                    <a 
-                      :class="{hrefSub:true,clicked:currentId == subTitleDash(m.subTitle)}" 
-                      :href="'#'+subTitleDash(m.subTitle)"
-                      @click="currentId=subTitleDash(m.subTitle)">
-                        {{i+1+'. '}}{{m.subTitle}}
-                    </a>
-                </template>
-            </div>
-        </header>
-
+    <!-- Vue basic -->
+    <section id="app-vue-basic" class="app">
+        <!-- logo,title -->
+        <x-header :title="hTitle" :logo="imgLogo" ></x-header>
+        <!-- table of content -->
+        <x-toc :objmain="allMain" :currentid="currentId"></x-toc>
         <!-- content -->
-        <template v-for="m of allMain">
-            <x-main :objmain="m"></x-main>
-        </template>
-
+        <x-allmain :objmain="allMain"></x-allmain>
     </section>
 
     <!-- ////////////////////////////////////////////////////////////////// -->
+    <script>
+        window.addEventListener('load', () => {
+            document.querySelector('#loading-page').classList.add('hide');
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="asset/prism.js"></script>
     <script src="index.js"></script>
