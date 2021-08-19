@@ -177,7 +177,7 @@ header{
 }
 
 @media (max-width: 820px) {
-    #container{
+    .app{
         padding: 40px 20px;
     }
 }
