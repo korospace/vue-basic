@@ -18,18 +18,24 @@
 
     <div id="master">
         <nav>
-            <router-link 
-            to="/"
-            :class="{clicked:currentNav == '/',link:true}" 
-            @click.native="currentNav = '/'">
-                basic
-            </router-link>
-            <router-link 
-            to="/component"
-            :class="{clicked:currentNav == '/component',link:true}" 
-            @click.native="currentNav = '/component'">
-                component
-            </router-link>
+            <div class="logo-wraper">
+                <img :src="logo" width="30px">
+                <h1>cheatsheet</h1>
+            </div>
+            <div class="link-wraper">
+                <router-link 
+                to="/"
+                :class="{clicked:currentNav == '/',link:true}" 
+                @click.native="currentNav = '/'">
+                    basic
+                </router-link>
+                <router-link 
+                to="/component"
+                :class="{clicked:currentNav == '/component',link:true}" 
+                @click.native="currentNav = '/component'">
+                    component
+                </router-link>
+            </div>
         </nav>
         
         <router-view 
