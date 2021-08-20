@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" href="asset/media/vue-logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="asset/highlight/styles/a11y-dark.min.css">
+    <link rel="stylesheet" href="asset/highlight/styles/stackoverflow-light.min.css">
     <link rel="stylesheet" href="index.css">
 
 </head>
@@ -25,14 +25,14 @@
             <div class="link-wraper">
                 <router-link 
                 to="/"
-                :class="{clicked:currentNav == '/',link:true}" 
-                @click.native="currentNav = '/',doHightLight()">
+                :class="{clicked:currentUrl == '',link:true}" 
+                @click.native="changeCurrUrl(),doHightLight()">
                     basic
                 </router-link>
                 <router-link 
                 to="/component"
-                :class="{clicked:currentNav == '/component',link:true}" 
-                @click.native="currentNav = '/component',doHightLight()">
+                :class="{clicked:currentUrl == 'component',link:true}" 
+                @click.native="changeCurrUrl(),doHightLight()">
                     component
                 </router-link>
             </div>

@@ -146,7 +146,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes,
 })
 
@@ -160,18 +160,23 @@ const master = new Vue({
         },
         logo      : 'asset/media/vue-logo.svg',
         currentId : '',
-        currentNav: '/',
+        currentUrl: '',
         lesson    : {
             vbasic     : [],
             vcomponent : []
         },
     },
     methods: {
+        changeCurrUrl: function() {
+            let arrUrl  = window.location.href.split('/');
+            this.currentUrl = arrUrl[arrUrl.length-1];
+        },
         doHightLight: function() {
             hljs.highlightAll();
         }
     },
     created: function(){
         hljs.highlightAll();
+        this.changeCurrUrl();
     }
 });

@@ -104,10 +104,10 @@ const vm = new Vue({
     },
 })`;
 
-let content4 = ` <video class="result" controls>
+let content4 = `<video class="result" controls>
     <source src="asset/media/4-event-handling.mp4" type="video/mp4">
     Your browser does not support the video tag.
-</video> `;
+</video>`;
 
 master.lesson.vbasic.push({
     subTitle : 'event handling',
@@ -122,6 +122,7 @@ master.lesson.vbasic.push({
 let codeHtml5 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;a href="" @click="warn('be carefull')">without prevent&lt;/a>
+    &lt;br>
     &lt;a href="" @click.prevent="warn('be carefull')">with prevent&lt;/a>
 &lt/div>`;
 
