@@ -1,57 +1,89 @@
 <!-- html -->
 <html>
     <style>
-        .toggle-wraper{
-            width: 50px;
-            height: 20px;
-            border-radius: 10px;
-            box-shadow: inset 0 0 4px 0px rgba(0, 0, 0, 0.4);
-            position: relative;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-        .toggle{
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: red;
-            position: absolute;
-            left: 0;
-        }
-        .toggle.on{
-            background-color: green;
-            left: auto;
-            right: 0;
-        }
+/* css */
+/* css */
+.itemList{
+    width: 205px;
+    margin-top: 6px;
+    background-color: #41B883;
+    border-radius: 3px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+b.cross{
+    text-decoration: line-through;
+    white-space: pre-wrap;
+}
+.btn-wraper{
+    min-width: 28px;
+}
+.btn-wraper span{
+    color: red;
+    cursor: pointer;
+}
     </style>
 <body>
-    <div id="myApp">
-        <x-result :datanum="num"></x-result>
-        <x-btncount @do-count="num++"></x-btncount>
+<!-- html -->
+<div id="myApp">
+    <input @keyup.enter="addItem('enter',$event)" type="text" placeholder="press enter to add">
+    <div id="todo-wraper">
+        <div v-for="(item,i) of itemsTodo" class="itemList">
+            <b :class="{cross: crossCheck(item)}">{{ i+1 }}. {{ item }}</b>
+            <div class="btn-wraper">
+                <input :value="item" @click="addCrossItem" type="checkbox" :checked="(crossCheck(item)) ? 'checked' : ''">
+                <span :data-value="item" @click="deleteItem">x</span>
+            </div>
+        </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>
-        /* js */
-        Vue.component('x-result',{
-            props: ['datanum'],
-            template: `<h1>result count: {{datanum}}</h1>`
-        })
+/* js */
+const vm = new Vue({
+    el   : '#myApp', 
+    data : {
+        itemsTodo : ['learning vue','hunting job'],
+        crossItem : ['learning vue'],
+    },
+    methods : {
+        addItem: function(inputType,event) {
+            let newItem = '';
+            (inputType == 'enter') ? newItem = event.target.value : newItem = event.target.previousElementSibling.value;
+            (newItem !== '') ? this.itemsTodo.push(newItem) : '';
+            (inputType == 'enter') ? event.target.value = '' : event.target.previousElementSibling.value = '';
+        },
+        addCrossItem : function(event) {
+            let isExist  = false;
+            let item     = event.target.value;
+            let elementP = event.target.parentElement.previousElementSibling;
 
-        Vue.component('x-btncount',{
-            template: `<button @click="$emit('do-count')">
-                do count
-            </button>`
-        })
+            this.crossItem.forEach(e => {
+               if(e === item){
+                   isExist = true;
+               } 
+            });
 
-        let vm = new Vue({
-            el: '#myApp',
-            data: {
-                num:0
+            if(!isExist){
+                this.crossItem.push(item);
+                elementP.classList.add('cross');
             }
-        })
+            else{
+                this.crossItem = this.crossItem.filter(e => e !== item);
+                elementP.classList.remove('cross');
+            }
+        },
+        crossCheck: function(item){
+            let isExist = this.crossItem.find(e => e === item);
+            return isExist;
+        },
+        deleteItem: function(event) {
+            this.itemsTodo = this.itemsTodo.filter(e => e !== event.target.dataset.value);
+        }
+    }
+});
 
     </script>
 </body>

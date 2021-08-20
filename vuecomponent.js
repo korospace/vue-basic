@@ -88,7 +88,7 @@ let codeCss12 = `/* css */
     right: 0;
 }`;
 
-let content12 = `<img class="result" src="asset/media/12-reusable-component.gif">`;
+let content12 = `<img class="result" loading="lazy" src="asset/media/12-reusable-component.gif">`;
 
 master.lesson.vcomponent.push({
     subTitle : 'reusable component',
@@ -164,13 +164,48 @@ let vm = new Vue({
     }
 })`;
 
-let content14 = `<img class="result" src="asset/media/14-emitting-value-using-emit.gif">`;
+let content14 = `<img class="result" loading="lazy" src="asset/media/14-emitting-value-using-emit.gif">`;
 
 master.lesson.vcomponent.push({
-    subTitle : 'emitting value using emit',
+    subTitle : 'emitting value with dollar emit',
     codeHtml : codeHtml14,
     codeJs   : codeJs14,
     codeCss  : '',
     content  : content14,
+    linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
+});
+
+// 15-special-property-(event) 
+let codeHtml15 = `&lt;!-- html -->
+&lt;div id="myApp">
+    &lt;x-result :datamsg="message">&lt;/x-result>
+    &lt;x-input @changemsg="message = $event">&lt;/x-inp>
+&lt;/div>`;
+
+let codeJs15 = `/* js */
+Vue.component('x-result',{
+    props: ['datamsg'],
+    template: \`&lt;h1>message: {{datamsg}}&lt;/h1>\`
+})
+
+Vue.component('x-input',{
+    template: \`&lt;input type="text" @keyup="$emit('changemsg',$event.target.value)">\`
+})
+
+let vm = new Vue({
+    el: '#myApp',
+    data: {
+        message:''
+    }
+})`;
+
+let content15 = `<img class="result" loading="lazy" src="asset/media/15-event-is-special-property.gif">`;
+
+master.lesson.vcomponent.push({
+    subTitle : 'dollar event in emit',
+    codeHtml : codeHtml15,
+    codeJs   : codeJs15,
+    codeCss  : '',
+    content  : content15,
     linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
 });

@@ -194,10 +194,8 @@ let codeCss6 = `/* css */
     padding: 4px 8px;
 }`;
 
-let content6 = `<video class="result" controls>
-    <source src="asset/media/6-two-ways-data-binding.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>`;
+let content6 = `<img class="result" loading="lazy" src="asset/media/6-two-ways-data-binding.gif">`;
+
 
 master.lesson.vbasic.push({
     subTitle : 'two ways data binding',
@@ -245,10 +243,7 @@ const vm = new Vue({
     }
 });`;
 
-let content7 = `<video class="result" controls>
-    <source src="asset/media/7-computed-property.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>`;
+let content7 = `<img class="result" loading="lazy" src="asset/media/7-computed-property.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'computed property',
@@ -286,10 +281,7 @@ const vm = new Vue({
     }
 });`;
 
-let content8 = `<video class="result" controls>
-    <source src="asset/media/8-conditional-rendering.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>`;
+let content8 = `<img class="result" loading="lazy" src="asset/media/8-conditional-rendering.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'conditional rendering',
@@ -305,10 +297,10 @@ let codeHtml9 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;img id="jumbotron" :src="wallpaper" width="500">
     &lt;div id="thumbnail-wraper">
-        &lt;img src="https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-        &lt;img src="https://vuebasic.netlify.app/asset/media/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+        &lt;img src="https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
+        &lt;img src="https://vuebasic.netlify.app/asset/media/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
     &lt;/div>
-&lt;/div>`;
+&lt;/div>>`;
 
 let codeJs9 = `/* js */
 const vm = new Vue({
@@ -329,29 +321,25 @@ const vm = new Vue({
 
 let codeCss9 = `/* css */
 #jumbotron{
-    width: 500px;
+    width: 200px;
+    margin-bottom: 10px;
 }
 #thumbnail-wraper{
     display: flex;
     align-items: center;
-    margin-top: 10px;
-    height: 60px;
 }
 #thumbnail-wraper img{
     cursor: pointer;
-    opacity: 0.7;
-    margin-left: 4px;
+    opacity: 0.5;
+    margin-right: 4px;
+    width: 50px;
 }
 #thumbnail-wraper img.clicked{
     cursor: default;
     opacity: 1;
-    transform: scale(0.9);
 }`;
 
-let content9 = `<video class="result" controls>
-    <source src="asset/media/9-attribute-binding.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>`;
+let content9 = `<img class="result" loading="lazy" src="asset/media/9-attribute-binding.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'attribute binding',
@@ -443,10 +431,7 @@ b.cross{
     cursor: pointer;
 }`;
 
-let content10 = `<video class="result" controls>
-    <source src="asset/media/10-looping.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>`;
+let content10 = `<img class="result" loading="lazy" src="asset/media/10-looping.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'looping',
