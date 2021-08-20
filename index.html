@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="asset/vue-logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="asset/prism/prism.css">
+    <link rel="shortcut icon" href="asset/media/vue-logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="asset/highlight/styles/a11y-dark.min.css">
     <link rel="stylesheet" href="index.css">
 
 </head>
 <body>
     <section id="loading-page">
-        <img class="pulse" src="asset/vue-logo.svg" width="120px">
+        <img class="pulse" src="asset/media/vue-logo.svg" width="120px">
     </section>
 
     <div id="master">
@@ -26,13 +26,13 @@
                 <router-link 
                 to="/"
                 :class="{clicked:currentNav == '/',link:true}" 
-                @click.native="currentNav = '/'">
+                @click.native="currentNav = '/',doHightLight()">
                     basic
                 </router-link>
                 <router-link 
                 to="/component"
                 :class="{clicked:currentNav == '/component',link:true}" 
-                @click.native="currentNav = '/component'">
+                @click.native="currentNav = '/component',doHightLight()">
                     component
                 </router-link>
             </div>
@@ -56,8 +56,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <script src="asset/prism/prism.js"></script>
-    <script src="component.js"></script>
+    <script src="asset/highlight/highlight.min.js"></script>
     <script src="index.js"></script>
     <script src="vuebasic.js"></script>
     <script src="vuecomponent.js"></script>

@@ -31,13 +31,13 @@ html,body{
 .sub-title{
     margin-top: 60px;
     margin-bottom: 20px;
-    color: rgba(0, 0, 0, 0.8);
+    color: #34495E;
     font-size: 30px;
     text-transform: capitalize;
 }
 .paragraph{
     margin: 10px 0;
-    color: rgba(0, 0, 0, 0.8);
+    color: #34495E;
 }
 .small-text{
     margin: 10px 0 10px 0;
@@ -129,7 +129,7 @@ nav{
     display: block;
     text-decoration: none;
     text-align: center;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(52, 73, 94);
     border-bottom: 4px solid rgba(199, 195, 195, 0);
 }
 .link-wraper .link.clicked{
@@ -157,7 +157,7 @@ header{
     padding: 8px;
     background-color: #fff;
     border-radius: 4px;
-    color: rgba(0, 0, 0, 0.8);
+    color: #34495E;
     box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.4);
     opacity: 0;
     transition: all 0.5s;
@@ -181,10 +181,11 @@ header{
     box-shadow: inset 0 0 40px 0px rgba(0, 0, 0, 0.4);
 }
 .table-of-content a{
-    color: rgba(255, 255, 255, 0.8);
+    font-family: 'quicksand-bold', sans-serif;
+    color: rgba(52, 73, 94, 0.8);
 }
 .table-of-content a.clicked{
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .result-wraper{
@@ -196,6 +197,7 @@ header{
 .code-wraper{
     position: relative;
     overflow: auto;
+    margin-bottom: 10px;
 }
 
 .btn-copy{
@@ -249,6 +251,8 @@ header{
     }
     .link-wraper .link{
         flex: 1;
+        padding: 10px 20px;
+        font-size: 12px;
     }
 
     .btn-up{

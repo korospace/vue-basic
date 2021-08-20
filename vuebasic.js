@@ -70,7 +70,7 @@ const vm = new Vue({
 // v-once atribute make your value is unalterable
 vm.testVOnce = "edit variable testVOnce";`;
 
-let content3 = `<img class="result" src="asset/result/3-directive.png">`;
+let content3 = `<img class="result" src="asset/media/3-directive.png">`;
 
 master.lesson.vbasic.push({
     subTitle : 'directive',
@@ -105,7 +105,7 @@ const vm = new Vue({
 })`;
 
 let content4 = ` <video class="result" controls>
-    <source src="asset/result/4-event-handling.mp4" type="video/mp4">
+    <source src="asset/media/4-event-handling.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video> `;
 
@@ -136,7 +136,7 @@ const vm = new Vue({
 });`;
 
 let content5 = `<video class="result" controls>
-    <source src="asset/result/5-event-modifier.mp4" type="video/mp4">
+    <source src="asset/media/5-event-modifier.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>`;
 
@@ -194,7 +194,7 @@ let codeCss6 = `/* css */
 }`;
 
 let content6 = `<video class="result" controls>
-    <source src="asset/result/6-two-ways-data-binding.mp4" type="video/mp4">
+    <source src="asset/media/6-two-ways-data-binding.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>`;
 
@@ -245,7 +245,7 @@ const vm = new Vue({
 });`;
 
 let content7 = `<video class="result" controls>
-    <source src="asset/result/7-computed-property.mp4" type="video/mp4">
+    <source src="asset/media/7-computed-property.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>`;
 
@@ -286,7 +286,7 @@ const vm = new Vue({
 });`;
 
 let content8 = `<video class="result" controls>
-    <source src="asset/result/8-conditional-rendering.mp4" type="video/mp4">
+    <source src="asset/media/8-conditional-rendering.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>`;
 
@@ -304,8 +304,8 @@ let codeHtml9 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;img id="jumbotron" :src="wallpaper" width="500">
     &lt;div id="thumbnail-wraper">
-        &lt;img src="https://vuebasic.netlify.app/asset/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-        &lt;img src="https://vuebasic.netlify.app/asset/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+        &lt;img src="https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
+        &lt;img src="https://vuebasic.netlify.app/asset/media/vuewallpaper2.png" width="100" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
     &lt;/div>
 &lt;/div>`;
 
@@ -313,7 +313,7 @@ let codeJs9 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
-        wallpaper: 'https://vuebasic.netlify.app/asset/vuewallpaper1.jpeg',
+        wallpaper: 'https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg',
     },
     methods : {
         srcCheck : function(src) {
@@ -348,7 +348,7 @@ let codeCss9 = `/* css */
 }`;
 
 let content9 = `<video class="result" controls>
-    <source src="asset/result/9-attribute-binding.mp4" type="video/mp4">
+    <source src="asset/media/9-attribute-binding.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>`;
 
@@ -443,7 +443,7 @@ b.cross{
 }`;
 
 let content10 = `<video class="result" controls>
-    <source src="asset/result/10-looping.mp4" type="video/mp4">
+    <source src="asset/media/10-looping.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>`;
 
