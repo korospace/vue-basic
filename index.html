@@ -38,15 +38,16 @@
             </div>
         </nav>
         
-        <transition name="fade">
+        <!-- <transition name="fade"> -->
             <router-view 
                 :logo="logo" 
                 :title="title"
                 :lesson="lesson"
                 :currentid="currentId"
-                @changecurrid="currentId=$event">
+                @changecurrid="currentId=$event"
+                @change-curr-url="changeCurrUrl()">
             </router-view>
-        </transition>   
+        <!-- </transition> -->
     </div>
 
     <!-- ////////////////////////////////////////////////////////////////// -->

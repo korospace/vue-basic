@@ -113,6 +113,7 @@ const vbasic = {
     },
     mounted: function() {
         hljs.highlightAll();
+        this.$emit('change-curr-url');
     },
     template: `<section class="app">
         <x-header :title="title.vbasic" :logo="logo" ></x-header>
@@ -135,6 +136,7 @@ const vcomponent = {
     },
     mounted: function() {
         hljs.highlightAll();
+        this.$emit('change-curr-url');
     },
     template: `<section class="app">
         <x-header :title="title.vcomponent" :logo="logo" ></x-header>
@@ -146,9 +148,23 @@ const vcomponent = {
     </section>` 
 }
 
+let notfpage = {
+    props: ['logo'],
+    components: {
+        'x-header': xheader,
+    },
+    created: function(){
+        this.$emit('change-curr-url');
+    },
+    template: `<section class="app">
+        <x-header title="404 not found" :logo="logo" ></x-header>
+    </section>` 
+}
+
 const routes = [
   { path: '/', component: vbasic },
-  { path: '/component', component: vcomponent }
+  { path: '/component', component: vcomponent },
+  { path: '*', component: notfpage },
 ]
 
 const router = new VueRouter({
@@ -177,8 +193,5 @@ const master = new Vue({
             let arrUrl  = window.location.href.split('/');
             this.currentUrl = arrUrl[arrUrl.length-1];
         },
-    },
-    created: function(){
-        this.changeCurrUrl();
     },
 });
