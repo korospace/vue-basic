@@ -103,7 +103,7 @@ let xmain = {
 }
 
 // vue basic page
-const vbasic =  { 
+const vbasic = { 
     props: ['logo','title','currentid','lesson'],
     components: {
         'x-header': xheader,

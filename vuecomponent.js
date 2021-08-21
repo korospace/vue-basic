@@ -209,3 +209,76 @@ master.lesson.vcomponent.push({
     content  : content16,
     linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
 });
+
+// 17-form-submit
+let codeHtml17 = `&lt;!-- html -->
+&lt;div id="myApp">
+    &lt;x-form @insert-data="insertData($event)">&lt;/x-form>
+    &lt;hr>
+    &lt;div style="display: flex;">
+        &lt;div v-for="w of wallpapers" style="margin-right: 10px;">
+            &lt;img :src="w.imgsrc" width="200">
+            &lt;p>{{ w.caption }}&lt;/p>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>`;
+
+let codeJs17 = `/*js*/
+Vue.component('x-form',{
+    data(){
+        return{
+            imgpreview:'https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg'
+        }
+    },
+    methods:{
+        changePreview(event){
+            this.imgpreview = URL.createObjectURL(event.target.files[0]);
+        },
+        submitForm(event){
+            this.$emit('insert-data',event);
+            this.imgpreview = "https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg";
+            this.$refs.wallpaper.value = "";
+            this.$refs.caption.value   = "";
+        }
+    },
+    template:\`&lt;form @submit.prevent="submitForm" enctype="multipart/form-data">
+        &lt;img :src="imgpreview" width="200"/>
+        &lt;br>&lt;br>
+        &lt;input id="wallpaper" name="wallpaper" ref="wallpaper" type="file" @change="changePreview">
+        &lt;br>&lt;br>
+        &lt;textarea id="caption" name="caption" ref="caption" placeholder="caption...">&lt;/textarea>    
+        &lt;br>&lt;br>
+        &lt;button name="submit" type="submit">submit&lt;/button>
+    &lt;/form>\`
+})
+
+const vm = new Vue({
+    el   : '#myApp',
+    data : {
+        wallpapers : []
+    },
+    methods : {
+        insertData(event){
+            let myForm = new FormData(event.target);
+
+            this.wallpapers.push({
+                imgsrc : URL.createObjectURL(myForm.get('wallpaper')),
+                caption: myForm.get('caption')
+            })
+        }
+    }
+});`;
+
+let content17 = `<video class="result" controls>
+    <source src="asset/media/17-form-submit.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>`;
+
+master.lesson.vcomponent.push({
+    subTitle : 'form submit',
+    codeHtml : codeHtml17,
+    codeJs   : codeJs17,
+    codeCss  : '',
+    content  : content17,
+    linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
+});
