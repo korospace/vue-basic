@@ -27,60 +27,22 @@ b.cross{
 <body>
 <!-- html -->
 <div id="myApp">
-    <input @keyup.enter="addItem('enter',$event)" type="text" placeholder="press enter to add">
-    <div id="todo-wraper">
-        <div v-for="(item,i) of itemsTodo" class="itemList">
-            <b :class="{cross: crossCheck(item)}">{{ i+1 }}. {{ item }}</b>
-            <div class="btn-wraper">
-                <input :value="item" @click="addCrossItem" type="checkbox" :checked="(crossCheck(item)) ? 'checked' : ''">
-                <span :data-value="item" @click="deleteItem">x</span>
-            </div>
-        </div>
-    </div>
+    <button @click="testing1">testing 1</button>
+    <button @click="testing2('hello world',$event)">testing 2</button>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>
 /* js */
 const vm = new Vue({
-    el   : '#myApp', 
-    data : {
-        itemsTodo : ['learning vue','hunting job'],
-        crossItem : ['learning vue'],
-    },
+    el   : '#myApp',
     methods : {
-        addItem: function(inputType,event) {
-            let newItem = '';
-            (inputType == 'enter') ? newItem = event.target.value : newItem = event.target.previousElementSibling.value;
-            (newItem !== '') ? this.itemsTodo.push(newItem) : '';
-            (inputType == 'enter') ? event.target.value = '' : event.target.previousElementSibling.value = '';
+        testing1: function(event){
+            console.log(event.target); // <button>
         },
-        addCrossItem : function(event) {
-            let isExist  = false;
-            let item     = event.target.value;
-            let elementP = event.target.parentElement.previousElementSibling;
-
-            this.crossItem.forEach(e => {
-               if(e === item){
-                   isExist = true;
-               } 
-            });
-
-            if(!isExist){
-                this.crossItem.push(item);
-                elementP.classList.add('cross');
-            }
-            else{
-                this.crossItem = this.crossItem.filter(e => e !== item);
-                elementP.classList.remove('cross');
-            }
-        },
-        crossCheck: function(item){
-            let isExist = this.crossItem.find(e => e === item);
-            return isExist;
-        },
-        deleteItem: function(event) {
-            this.itemsTodo = this.itemsTodo.filter(e => e !== event.target.dataset.value);
+        testing2: function(message,event){
+            console.log(message);      // hello world
+            console.log(event.target); // <button>
         }
     }
 });

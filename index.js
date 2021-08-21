@@ -103,13 +103,16 @@ let xmain = {
 }
 
 // vue basic page
-const vbasic = { 
+const vbasic =  { 
     props: ['logo','title','currentid','lesson'],
     components: {
         'x-header': xheader,
         'x-btnup' : xbtnup,
         'x-toc'   : xtoc,
         'x-main'  : xmain,
+    },
+    mounted: function() {
+        hljs.highlightAll();
     },
     template: `<section class="app">
         <x-header :title="title.vbasic" :logo="logo" ></x-header>
@@ -129,6 +132,9 @@ const vcomponent = {
         'x-btnup' : xbtnup,
         'x-toc'   : xtoc,
         'x-main'  : xmain,
+    },
+    mounted: function() {
+        hljs.highlightAll();
     },
     template: `<section class="app">
         <x-header :title="title.vcomponent" :logo="logo" ></x-header>
@@ -171,12 +177,8 @@ const master = new Vue({
             let arrUrl  = window.location.href.split('/');
             this.currentUrl = arrUrl[arrUrl.length-1];
         },
-        doHightLight: function() {
-            hljs.highlightAll();
-        }
     },
     created: function(){
-        hljs.highlightAll();
         this.changeCurrUrl();
-    }
+    },
 });

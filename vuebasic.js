@@ -150,8 +150,40 @@ master.lesson.vbasic.push({
     linkdocs : 'https://vuejs.org/v2/guide/events.html#Event-Modifiers'
 });
 
-// 6-two-ways-data-binding
+// 6-dollar-event
 let codeHtml6 = `&lt;!-- html -->
+&lt;div id="myApp">
+    &lt;button @click="testing1">testing 1&lt;/button>
+    &lt;button @click="testing2('hello world',$event)">testing 2&lt;/button>
+&lt;/div>`;
+
+let codeJs6 = `/* js */
+const vm = new Vue({
+    el   : '#myApp',
+    methods : {
+        testing1: function(event){
+            console.log(event.target); // &lt;button>
+        },
+        testing2: function(message,event){
+            console.log(message);      // hello world
+            console.log(event.target); // &lt;button>
+        }
+    }
+});`;
+
+let content6 = `<img class="result" loading="lazy" src="asset/media/6-dollar-event.gif">`;
+
+master.lesson.vbasic.push({
+    subTitle : 'dollar event',
+    codeHtml : codeHtml6,
+    codeJs   : codeJs6,
+    codeCss  : '',
+    content  : content6,
+    linkdocs : 'https://vuejs.org/v2/guide/events.html#Event-Modifiers'
+});
+
+// 7-two-ways-data-binding
+let codeHtml7 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;div id="tag-wraper" v-html="tagMaker">&lt;/div>
 
@@ -165,7 +197,7 @@ let codeHtml6 = `&lt;!-- html -->
     &lt;/label>
 &lt;/div>`;
 
-let codeJs6 = `/* js */
+let codeJs7 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
@@ -182,7 +214,7 @@ const vm = new Vue({
     }
 });`;
 
-let codeCss6 = `/* css */
+let codeCss7 = `/* css */
 #tag-wraper{
     min-height: 24px;
     margin: 20px 0;
@@ -194,26 +226,26 @@ let codeCss6 = `/* css */
     padding: 4px 8px;
 }`;
 
-let content6 = `<img class="result" loading="lazy" src="asset/media/6-two-ways-data-binding.gif">`;
+let content7 = `<img class="result" loading="lazy" src="asset/media/7-two-ways-data-binding.gif">`;
 
 
 master.lesson.vbasic.push({
     subTitle : 'two ways data binding',
-    codeHtml : codeHtml6,
-    codeJs   : codeJs6,
-    codeCss  : codeCss6,
-    content  : content6,
+    codeHtml : codeHtml7,
+    codeJs   : codeJs7,
+    codeCss  : codeCss7,
+    content  : content7,
     linkdocs : 'https://vuejs.org/v2/api/#v-model'
 });
 
-// 7-computed-property
-let codeHtml7 = `&lt;!-- html -->
+// 8-computed-property
+let codeHtml8 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;input v-model="numVal" type="text">
     &lt;p v-html="numCheck">&lt;/p>
 &lt;/div>`;
 
-let codeJs7 = `/* js */
+let codeJs8 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
@@ -243,19 +275,19 @@ const vm = new Vue({
     }
 });`;
 
-let content7 = `<img class="result" loading="lazy" src="asset/media/7-computed-property.gif">`;
+let content8 = `<img class="result" loading="lazy" src="asset/media/8-computed-property.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'computed property',
-    codeHtml : codeHtml7,
-    codeJs   : codeJs7,
+    codeHtml : codeHtml8,
+    codeJs   : codeJs8,
     codeCss  : '',
-    content  : content7,
+    content  : content8,
     linkdocs : 'https://vuejs.org/v2/guide/computed.html'
 });
 
-// 8-conditional-rendering
-let codeHtml8 = `&lt;!-- html -->
+// 9-conditional-rendering
+let codeHtml9 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;input type="text" placeholder="type something" v-on:keyup="insertValueDataInput">&lt;br>&lt;br>
     &lt;b>data type:&lt;/b>
@@ -268,7 +300,7 @@ let codeHtml8 = `&lt;!-- html -->
     &lt;/span>
 &lt;/div>`;
 
-let codeJs8 = `/* js */
+let codeJs9 = `/* js */
 const vm = new Vue({
     el   : '#myApp',
     data : {
@@ -281,19 +313,19 @@ const vm = new Vue({
     }
 });`;
 
-let content8 = `<img class="result" loading="lazy" src="asset/media/8-conditional-rendering.gif">`;
+let content9 = `<img class="result" loading="lazy" src="asset/media/9-conditional-rendering.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'conditional rendering',
-    codeHtml : codeHtml8,
-    codeJs   : codeJs8,
+    codeHtml : codeHtml9,
+    codeJs   : codeJs9,
     codeCss  : '',
-    content  : content8,
+    content  : content9,
     linkdocs : 'https://vuejs.org/v2/guide/conditional.html'
 });
 
-// 9-attribute-binding
-let codeHtml9 = `&lt;!-- html -->
+// 10-attribute-binding
+let codeHtml10 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;img id="jumbotron" :src="wallpaper" width="500">
     &lt;div id="thumbnail-wraper">
@@ -302,7 +334,7 @@ let codeHtml9 = `&lt;!-- html -->
     &lt;/div>
 &lt;/div>>`;
 
-let codeJs9 = `/* js */
+let codeJs10 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
@@ -319,7 +351,7 @@ const vm = new Vue({
     },
 });`;
 
-let codeCss9 = `/* css */
+let codeCss10 = `/* css */
 #jumbotron{
     width: 200px;
     margin-bottom: 10px;
@@ -339,19 +371,19 @@ let codeCss9 = `/* css */
     opacity: 1;
 }`;
 
-let content9 = `<img class="result" loading="lazy" src="asset/media/9-attribute-binding.gif">`;
+let content10 = `<img class="result" loading="lazy" src="asset/media/10-attribute-binding.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'attribute binding',
-    codeHtml : codeHtml9,
-    codeJs   : codeJs9,
-    codeCss  : codeCss9,
-    content  : content9,
+    codeHtml : codeHtml10,
+    codeJs   : codeJs10,
+    codeCss  : codeCss10,
+    content  : content10,
     linkdocs : 'https://vuejs.org/v2/guide/security.html#Injecting-URLs'
 });
 
-// 10-looping
-let codeHtml10 = `&lt;!-- html -->
+// 11-looping
+let codeHtml11 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;input @keyup.enter="addItem('enter',$event)" type="text" placeholder="press enter to add">
     &lt;div id="todo-wraper">
@@ -365,7 +397,7 @@ let codeHtml10 = `&lt;!-- html -->
     &lt;/div>
 &lt;/div>`;
 
-let codeJs10 = `/* js */
+let codeJs11 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
@@ -409,7 +441,7 @@ const vm = new Vue({
     }
 });`;
 
-let codeCss10 = `/* css */
+let codeCss11 = `/* css */
 .itemList{
     width: 205px;
     margin-top: 6px;
@@ -431,13 +463,13 @@ b.cross{
     cursor: pointer;
 }`;
 
-let content10 = `<img class="result" loading="lazy" src="asset/media/10-looping.gif">`;
+let content11 = `<img class="result" loading="lazy" src="asset/media/11-looping.gif">`;
 
 master.lesson.vbasic.push({
     subTitle : 'looping',
-    codeHtml : codeHtml10,
-    codeJs   : codeJs10,
-    codeCss  : codeCss10,
-    content  : content10,
+    codeHtml : codeHtml11,
+    codeJs   : codeJs11,
+    codeCss  : codeCss11,
+    content  : content11,
     linkdocs : 'https://vuejs.org/v2/api/#v-model'
 });

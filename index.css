@@ -143,6 +143,16 @@ nav{
     box-shadow: 0 0 40px 0px rgba(0, 0, 0, 0.4);
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.7s ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+
 header{
     display: flex;
     flex-direction: column;

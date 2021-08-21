@@ -26,25 +26,27 @@
                 <router-link 
                 to="/"
                 :class="{clicked:currentUrl == '',link:true}" 
-                @click.native="changeCurrUrl(),doHightLight()">
+                @click.native="changeCurrUrl()">
                     basic
                 </router-link>
                 <router-link 
                 to="/component"
                 :class="{clicked:currentUrl == 'component',link:true}" 
-                @click.native="changeCurrUrl(),doHightLight()">
+                @click.native="changeCurrUrl()">
                     component
                 </router-link>
             </div>
         </nav>
         
-        <router-view 
-            :logo="logo" 
-            :title="title"
-            :lesson="lesson"
-            :currentid="currentId"
-            @changecurrid="currentId=$event">
-        </router-view>
+        <transition name="fade">
+            <router-view 
+                :logo="logo" 
+                :title="title"
+                :lesson="lesson"
+                :currentid="currentId"
+                @changecurrid="currentId=$event">
+            </router-view>
+        </transition>   
     </div>
 
     <!-- ////////////////////////////////////////////////////////////////// -->
@@ -54,7 +56,8 @@
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>     
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="asset/highlight/highlight.min.js"></script>
     <script src="index.js"></script>

@@ -1,11 +1,11 @@
 // 1-component-registration
-let codeHtml11 = `&lt;!-- html -->
+let codeHtml12 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;my-component-a>&lt;/my-component-a>
     &lt;my-component-b>&lt;/my-component-b>
 &lt;/div>`;
 
-let codeJs11 = `/* js */
+let codeJs12 = `/* js */
 
 // Global Registration
 Vue.component('my-component-a',{
@@ -30,15 +30,15 @@ let vm = new Vue({
 
 master.lesson.vcomponent.push({
     subTitle : 'component registration',
-    codeHtml : codeHtml11,
-    codeJs   : codeJs11,
+    codeHtml : codeHtml12,
+    codeJs   : codeJs12,
     codeCss  : '',
     content  : '',
     linkdocs : 'https://vuejs.org/v2/guide/components-registration.html'
 });
 
-// 12-reusable-component
-let codeHtml12 = `&lt;!-- html -->
+// 2-reusable-component
+let codeHtml13 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;x-toggle>&lt;/x-toggle>
     &lt;x-toggle>&lt;/x-toggle>
@@ -46,7 +46,7 @@ let codeHtml12 = `&lt;!-- html -->
     &lt;x-toggle>&lt;/x-toggle>
 &lt;/div>`;
 
-let codeJs12 = `/* js */
+let codeJs13 = `/* js */
 Vue.component('x-toggle',{
     data(){
         return{
@@ -62,7 +62,7 @@ let vm = new Vue({
     el: '#myApp',
 })`;
 
-let codeCss12 = `/* css */
+let codeCss13 = `/* css */
 .toggle-wraper{
     width: 50px;
     height: 20px;
@@ -88,24 +88,24 @@ let codeCss12 = `/* css */
     right: 0;
 }`;
 
-let content12 = `<img class="result" loading="lazy" src="asset/media/12-reusable-component.gif">`;
+let content13 = `<img class="result" loading="lazy" src="asset/media/13-reusable-component.gif">`;
 
 master.lesson.vcomponent.push({
     subTitle : 'reusable component',
-    codeHtml : codeHtml12,
-    codeJs   : codeJs12,
-    codeCss  : codeCss12,
-    content  : content12,
+    codeHtml : codeHtml13,
+    codeJs   : codeJs13,
+    codeCss  : codeCss13,
+    content  : content13,
     linkdocs : 'https://vuejs.org/v2/guide/components.html#Reusing-Components'
 });
 
-// 13-passing-data-with-props
-let codeHtml13 = `&lt;!-- html -->
+// 3-passing-data-with-props
+let codeHtml14 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;x-list :datastudent="students">&lt;/x-list>
 &lt;/div>`;
 
-let codeJs13 = `/* js */
+let codeJs14 = `/* js */
 Vue.component('x-list',{
     props: ['datastudent'],
     template: \`&lt;ul>
@@ -127,25 +127,25 @@ let vm = new Vue({
     }
 })`;
 
-let content13 = `<img class="result" src="asset/media/13-passing-data-with-props.png">`;
+let content14 = `<img class="result" src="asset/media/14-passing-data-with-props.png">`;
 
 master.lesson.vcomponent.push({
     subTitle : 'passing data with props',
-    codeHtml : codeHtml13,
-    codeJs   : codeJs13,
+    codeHtml : codeHtml14,
+    codeJs   : codeJs14,
     codeCss  : '',
-    content  : content13,
+    content  : content14,
     linkdocs : 'https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props'
 });
 
-// 14-emitting-value-using-$emit 
-let codeHtml14 = `&lt;!-- html -->
+// 4-emitting-value-using-$emit 
+let codeHtml15 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;x-result :datanum="num">&lt;/x-result>
     &lt;x-btncount @do-count="num++">&lt;/x-btncount>
 &lt;/div>`;
 
-let codeJs14 = `/* js */
+let codeJs15 = `/* js */
 Vue.component('x-result',{
     props: ['datanum'],
     template: \`&lt;h1>result count: {{datanum}}&lt;/h1>\`
@@ -164,25 +164,25 @@ let vm = new Vue({
     }
 })`;
 
-let content14 = `<img class="result" loading="lazy" src="asset/media/14-emitting-value-using-emit.gif">`;
+let content15 = `<img class="result" loading="lazy" src="asset/media/15-emitting-value-using-emit.gif">`;
 
 master.lesson.vcomponent.push({
     subTitle : 'emitting value with dollar emit',
-    codeHtml : codeHtml14,
-    codeJs   : codeJs14,
+    codeHtml : codeHtml15,
+    codeJs   : codeJs15,
     codeCss  : '',
-    content  : content14,
+    content  : content15,
     linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
 });
 
-// 15-special-property-(event) 
-let codeHtml15 = `&lt;!-- html -->
+// 5-special-property-(event) 
+let codeHtml16 = `&lt;!-- html -->
 &lt;div id="myApp">
     &lt;x-result :datamsg="message">&lt;/x-result>
     &lt;x-input @changemsg="message = $event">&lt;/x-inp>
 &lt;/div>`;
 
-let codeJs15 = `/* js */
+let codeJs16 = `/* js */
 Vue.component('x-result',{
     props: ['datamsg'],
     template: \`&lt;h1>message: {{datamsg}}&lt;/h1>\`
@@ -199,13 +199,13 @@ let vm = new Vue({
     }
 })`;
 
-let content15 = `<img class="result" loading="lazy" src="asset/media/15-event-is-special-property.gif">`;
+let content16 = `<img class="result" loading="lazy" src="asset/media/16-event-is-special-property.gif">`;
 
 master.lesson.vcomponent.push({
     subTitle : 'dollar event in emit',
-    codeHtml : codeHtml15,
-    codeJs   : codeJs15,
+    codeHtml : codeHtml16,
+    codeJs   : codeJs16,
     codeCss  : '',
-    content  : content15,
+    content  : content16,
     linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
 });
