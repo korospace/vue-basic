@@ -1,14 +1,21 @@
 // X-HEADER
 let xheader = {
-    props: ['title','logo'],
-    template: `<header>
-        <img :src="logo" width="120px">
+    props: ['title','logo','isdark'],
+    template: `<header :class="{darkmode:isdark == 'true'}">
+        <img :src="logo">
         <h1 class="title">{{ title }}</h1>
+        <div class="toggle-dark-wraper" @click="$emit('change-isdark');">
+            <div :class="{'toggle-dark':true,darkmode:isdark == 'true'}">
+                <img v-if="isdark == 'false'" src="asset/media/sun.png" width="100%" height="100%"/>
+                <img v-if="isdark == 'true'" src="asset/media/moon.png" width="40%" height="90%"/>
+            </div>
+        </div>
     </header>`
 }
 
 // X-BTNUP
 let xbtnup = {
+    props: ['isdark'],
     data() {
         return {
           scrollpx: 0
@@ -21,17 +28,19 @@ let xbtnup = {
     },
     template: `<a 
     href="#" 
-    :class="{show: scrollpx > 100,'btn-up':true}" 
+    :class="{show: scrollpx > 100,'btn-up':true,darkmode:isdark == 'true'}" 
     @click="$emit('changecid', '')"
     >
         up
     </a>`
 }
+
 // X-TOC
 let xtoc = {
     props: {
         objmain: '',
-        cid: ''
+        cid: '',
+        isdark: ''
     },
     methods: {
         subTitleDash: (data) => {
@@ -44,7 +53,7 @@ let xtoc = {
             })
         },
     },
-    template: `<div class="table-of-content">
+    template: `<div :class="{'table-of-content':true,darkmode:isdark == 'true'}">
         <template v-for="(obj,i) of objmain">    
             <a 
             href=""
@@ -59,7 +68,7 @@ let xtoc = {
 
 // X-MAIN
 let xmain = {
-    props: ['objmain'],
+    props: ['objmain','isdark'],
     methods: {
         subTitleDash: (data) => {
             return data.replace(/ /g,'-');
@@ -78,19 +87,19 @@ let xmain = {
         <h1 class="sub-title" :id="subTitleDash(objmain.subTitle)">{{ objmain.subTitle }}</h1>
 
         <div class="code-wraper" v-if="objmain.codeHtml !== ''">
-            <div :class="{'btn-copy':true}" @click="copyCode(objmain.codeHtml,$event)">copy</div>
+            <div :class="{'btn-copy':true,darkmode:isdark=='true'}" @click="copyCode(objmain.codeHtml,$event)">copy</div>
             <textarea class="temp-textarea"></textarea>
-            <pre><code v-html="objmain.codeHtml" class="language-html"></code></pre>
+            <pre><code v-html="objmain.codeHtml" :class="{'language-html':true}"></code></pre>
         </div>
         <div class="code-wraper" v-if="objmain.codeJs !== ''">
-            <div :class="{'btn-copy':true}" @click="copyCode(objmain.codeJs,$event)">copy</div>
+            <div :class="{'btn-copy':true,darkmode:isdark=='true'}" @click="copyCode(objmain.codeJs,$event)">copy</div>
             <textarea class="temp-textarea"></textarea>
-            <pre><code v-html="objmain.codeJs" class="language-javascript"></code></pre>
+            <pre><code v-html="objmain.codeJs" :class="{'language-javascript':true}"></code></pre>
         </div>
         <div class="code-wraper" v-if="objmain.codeCss !== ''">
-            <div :class="{'btn-copy':true}" @click="copyCode(objmain.codeCss,$event)">copy</div>
+            <div :class="{'btn-copy':true,darkmode:isdark=='true'}" @click="copyCode(objmain.codeCss,$event)">copy</div>
             <textarea class="temp-textarea"></textarea>
-            <pre><code v-html="objmain.codeCss" class="language-css"></code></pre>
+            <pre><code v-html="objmain.codeCss" :class="{'language-css':true}"></code></pre>
         </div>
         
         <div class="result-wraper" v-if="objmain.content!==''">
@@ -104,7 +113,7 @@ let xmain = {
 
 // vue basic page
 const vbasic = { 
-    props: ['logo','title','currentid','lesson'],
+    props: ['logo','title','currentid','lesson','darkon'],
     components: {
         'x-header': xheader,
         'x-btnup' : xbtnup,
@@ -115,19 +124,19 @@ const vbasic = {
         hljs.highlightAll();
         this.$emit('change-curr-url');
     },
-    template: `<section class="app">
-        <x-header :title="title.vbasic" :logo="logo" ></x-header>
-        <x-btnup @changecid="$emit('changecurrid',$event)"></x-btnup>
-        <x-toc @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vbasic"></x-toc>
+    template: `<section :class="{app:true,darkmode:darkon === 'true'}">
+        <x-header :title="title.vbasic" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
+        <x-btnup @changecid="$emit('changecurrid',$event)" :isdark="darkon"></x-btnup>
+        <x-toc @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vbasic" :isdark="darkon"></x-toc>
         <template v-for="obj of lesson.vbasic">
-            <x-main :objmain="obj"></x-main>
+            <x-main :objmain="obj" :isdark="darkon"></x-main>
         </template>
     </section>` 
 }
 
 // vue component page
 const vcomponent = { 
-    props: ['logo','title','currentid','lesson'],
+    props: ['logo','title','currentid','lesson','darkon'],
     components: {
         'x-header': xheader,
         'x-btnup' : xbtnup,
@@ -138,12 +147,12 @@ const vcomponent = {
         hljs.highlightAll();
         this.$emit('change-curr-url');
     },
-    template: `<section class="app">
-        <x-header :title="title.vcomponent" :logo="logo" ></x-header>
+    template: `<section :class="{app:true,darkmode:darkon === 'true'}">
+        <x-header :title="title.vcomponent" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
         <x-btnup @changecid="$emit('changecurrid',$event)"></x-btnup>
-        <x-toc @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vcomponent"></x-toc>
+        <x-toc @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vcomponent" :isdark="darkon"></x-toc>
         <template v-for="obj of lesson.vcomponent">
-            <x-main :objmain="obj"></x-main>
+            <x-main :objmain="obj" :isdark="darkon"></x-main>
         </template>
     </section>` 
 }
@@ -187,11 +196,17 @@ const master = new Vue({
             vbasic     : [],
             vcomponent : []
         },
+        darkOn: localStorage.getItem('darkOn') || 'false'
     },
     methods: {
         changeCurrUrl: function() {
             let arrUrl  = window.location.href.split('/');
             this.currentUrl = arrUrl[arrUrl.length-1];
+        },
+        changeDarkOn: function() {
+            this.darkOn = (this.darkOn == 'false') ? 'true' : 'false';
+            localStorage.setItem('darkOn',this.darkOn);
+            hljs.highlightAll();
         },
     },
 });

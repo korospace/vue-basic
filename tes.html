@@ -1,0 +1,99 @@
+<!-- html -->
+<html>
+<body>
+
+    <!-- html -->
+<div id="myApp">
+    <x-form @insert-data="insertData($event)"></x-form>
+    <hr>
+    <div style="display: flex;">
+        <div v-for="w of wallpapers" style="margin-right: 10px;">
+            <img :src="w.imgsrc" width="200">
+            <p>{{ w.caption }}</p>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+/*js*/
+Vue.component('x-form',{
+    data(){
+        return{
+            imgpreview:'https://learningvue.netlify.app/asset/media/vuewallpaper1.jpeg',
+            validation: {
+                wallpaper: '',
+                caption: '',
+            }
+        }
+    },
+    methods:{
+        changePreview(event){
+            this.imgpreview = URL.createObjectURL(event.target.files[0]);
+        },
+        resetValidation(){
+            this.validation.wallpaper  = "";
+            this.validation.caption    = "";
+        },
+        resetInput(){
+            this.imgpreview = "https://learningvue.netlify.app/asset/media/vuewallpaper1.jpeg";
+            this.$refs.wallpaper.value = "";
+            this.$refs.caption.value   = "";
+        },
+        doValidation(){
+            let submitData = true;
+            this.resetValidation();
+            if(this.$refs.wallpaper.value == ''){
+                submitData = false;
+                this.validation.wallpaper = 'wallpaper is required';
+            }
+            if(this.$refs.caption.value == ''){
+                submitData = false;
+                this.validation.caption = 'caption is required';
+            }
+            return submitData;
+        },
+        submitForm(event){
+            if(this.doValidation()){
+                this.$emit('insert-data',event);
+                this.resetInput();
+            }
+        }
+    },
+    template:`<form @submit.prevent="submitForm" enctype="multipart/form-data">
+        <img :src="imgpreview" width="200"/>
+        <div>
+            <input id="wallpaper" name="wallpaper" ref="wallpaper" type="file" @change="changePreview">    
+            <small v-if="validation.wallpaper" style="display:block;color:red;">
+                {{validation.wallpaper}}
+            </small>
+        </div>
+        <div>
+            <textarea id="caption" name="caption" ref="caption" placeholder="caption here"></textarea>
+            <small v-if="validation.caption" style="display:block;color:red;">
+                {{validation.caption}}
+            </small>
+        </div>
+        <button name="submit" type="submit">submit</button>
+    </form>`
+})
+
+const vm = new Vue({
+    el   : '#myApp',
+    data : {
+        wallpapers : []
+    },
+    methods : {
+        insertData(event){
+            let myForm = new FormData(event.target);
+
+            this.wallpapers.push({
+                imgsrc : URL.createObjectURL(myForm.get('wallpaper')),
+                caption: myForm.get('caption')
+            })
+        }
+    }
+});
+    </script>
+</body>
+</html>

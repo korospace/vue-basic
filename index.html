@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" href="asset/media/vue-logo.svg" type="image/x-icon">
-    <link rel="stylesheet" href="asset/highlight/styles/stackoverflow-light.min.css">
+    <link rel="stylesheet" href="asset/highlight/styles/paraiso-light.min.css">
     <link rel="stylesheet" href="index.css">
 
 </head>
@@ -16,8 +16,8 @@
         <img class="pulse" src="asset/media/vue-logo.svg" width="120px">
     </section>
 
-    <div id="master">
-        <nav>
+    <div id="master" :class="{darkmode:darkOn == 'true'}">
+        <nav :class="{darkmode:darkOn == 'true'}">
             <div class="logo-wraper">
                 <img :src="logo" width="30px">
                 <h1>cheatsheet</h1>
@@ -44,7 +44,9 @@
                 :title="title"
                 :lesson="lesson"
                 :currentid="currentId"
+                :darkon="darkOn"
                 @changecurrid="currentId=$event"
+                @change-darkon="changeDarkOn"
                 @change-curr-url="changeCurrUrl()">
             </router-view>
         <!-- </transition> -->
@@ -57,9 +59,9 @@
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>     
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <!-- <script src="asset/vue/vue.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="asset/vue/vue-router.min.js"></script>
     <script src="asset/highlight/highlight.min.js"></script>
     <script src="index.js"></script>
     <script src="vuebasic.js"></script>

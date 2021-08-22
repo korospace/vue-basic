@@ -227,27 +227,60 @@ let codeJs17 = `/*js*/
 Vue.component('x-form',{
     data(){
         return{
-            imgpreview:'https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg'
+            imgpreview:'https://learningvue.netlify.app/asset/media/vuewallpaper1.jpeg',
+            validation: {
+                wallpaper: '',
+                caption: '',
+            }
         }
     },
     methods:{
         changePreview(event){
             this.imgpreview = URL.createObjectURL(event.target.files[0]);
         },
-        submitForm(event){
-            this.$emit('insert-data',event);
-            this.imgpreview = "https://vuebasic.netlify.app/asset/media/vuewallpaper1.jpeg";
+        resetValidation(){
+            this.validation.wallpaper  = "";
+            this.validation.caption    = "";
+        },
+        resetInput(){
+            this.imgpreview = "https://learningvue.netlify.app/asset/media/vuewallpaper1.jpeg";
             this.$refs.wallpaper.value = "";
             this.$refs.caption.value   = "";
+        },
+        doValidation(){
+            let submitData = true;
+            this.resetValidation();
+            if(this.$refs.wallpaper.value == ''){
+                submitData = false;
+                this.validation.wallpaper = 'wallpaper is required';
+            }
+            if(this.$refs.caption.value == ''){
+                submitData = false;
+                this.validation.caption = 'caption is required';
+            }
+            return submitData;
+        },
+        submitForm(event){
+            if(this.doValidation()){
+                this.$emit('insert-data',event);
+                this.resetInput();
+            }
         }
     },
     template:\`&lt;form @submit.prevent="submitForm" enctype="multipart/form-data">
         &lt;img :src="imgpreview" width="200"/>
-        &lt;br>&lt;br>
-        &lt;input id="wallpaper" name="wallpaper" ref="wallpaper" type="file" @change="changePreview">
-        &lt;br>&lt;br>
-        &lt;textarea id="caption" name="caption" ref="caption" placeholder="caption...">&lt;/textarea>    
-        &lt;br>&lt;br>
+        &lt;div>
+            &lt;input id="wallpaper" name="wallpaper" ref="wallpaper" type="file" @change="changePreview">    
+            &lt;small v-if="validation.wallpaper" style="display:block;color:red;">
+                {{validation.wallpaper}}
+            &lt;/small>
+        &lt;/div>
+        &lt;div>
+            &lt;textarea id="caption" name="caption" ref="caption" placeholder="caption here">&lt;/textarea>
+            &lt;small v-if="validation.caption" style="display:block;color:red;">
+                {{validation.caption}}
+            &lt;/small>
+        &lt;/div>
         &lt;button name="submit" type="submit">submit&lt;/button>
     &lt;/form>\`
 })
@@ -280,5 +313,5 @@ master.lesson.vcomponent.push({
     codeJs   : codeJs17,
     codeCss  : '',
     content  : content17,
-    linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
+    linkdocs : 'https://vuejs.org/v2/guide/forms.html#Text'
 });
