@@ -44,6 +44,7 @@
                 :currentid="currentId"
                 :darkon="darkOn"
                 @changecurrid="currentId=$event"
+                @changecurrurl="currentUrl=$event"
                 @change-darkon="changeDarkOn">
             </router-view>
         </transition>
@@ -61,8 +62,8 @@
     <script src="asset/vue/vue-router.min.js"></script>
     <script src="asset/highlight/highlight.min.js"></script>
     <script src="index.js"></script>
-    <script src="vuebasic.js"></script>
-    <script src="vuecomponent.js"></script>
+    <script src="vue-basic.js"></script>
+    <script src="vue-component.js"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

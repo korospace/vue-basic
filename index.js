@@ -121,6 +121,12 @@ const vbasic = {
         'x-toc'   : xtoc,
         'x-main'  : xmain,
     },
+    mounted(){
+        hljs.configure({ ignoreUnescapedHTML: true })
+        hljs.highlightAll();
+        let arrUrl  = window.location.href.split('/');
+        this.$emit('changecurrurl',arrUrl[arrUrl.length-1]);
+    },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
         <x-header :title="title.vbasic" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
         <x-btnup @changecid="$emit('changecurrid',$event)" :isdark="darkon"></x-btnup>
@@ -139,6 +145,12 @@ const vcomponent = {
         'x-btnup' : xbtnup,
         'x-toc'   : xtoc,
         'x-main'  : xmain,
+    },
+    mounted(){
+        hljs.configure({ ignoreUnescapedHTML: true })
+        hljs.highlightAll();
+        let arrUrl  = window.location.href.split('/');
+        this.$emit('changecurrurl',arrUrl[arrUrl.length-1]);
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
         <x-header :title="title.vcomponent" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
@@ -210,11 +222,4 @@ const master = new Vue({
         let arrUrl  = window.location.href.split('/');
         this.currentUrl = arrUrl[arrUrl.length-1];
     },
-    updated(){
-        hljs.configure({ ignoreUnescapedHTML: true })
-        hljs.highlightAll();
-        let arrUrl  = window.location.href.split('/');
-        this.currentUrl = arrUrl[arrUrl.length-1];
-    },
-    mounted(){}
 });

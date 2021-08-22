@@ -385,7 +385,7 @@ let codeHtml9 = `<!-- html -->
     <input type="text" placeholder="type something" v-on:keyup="insertValueDataInput"><br><br>
     <b>data type:</b>
     <span id="span-wraper" v-show="dataInput !== ''">
-        <span v-if="/true|false/.test(dataInput)">boolean</span>
+        <span v-if="/true|false/.test(dataInput.toLowerCase())">boolean</span>
         <span v-else-if="!/^\\d+$/.test(dataInput) && !/[^\\w\\s]/gi.test(dataInput)">string</span>
         <span v-else-if="/{/g.test(dataInput) && /}/g.test(dataInput)">object</span>
         <span v-else-if="/\\[/g.test(dataInput) && /\\]/g.test(dataInput)">array</span>
@@ -437,8 +437,8 @@ let codeHtml10 = `<!-- html -->
 <div id="myApp">
     <img id="jumbotron" :src="wallpaper" width="500">
     <div id="thumbnail-wraper">
-        <img src="https://vuecheatsheet.netlify.app/asset/media/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-        <img src="https://vuecheatsheet.netlify.app/asset/media/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+        <img src="asset/media/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
+        <img src="asset/media/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
     </div>
 </div>`;
 
@@ -446,7 +446,7 @@ let codeJs10 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
-        wallpaper: 'https://vuecheatsheet.netlify.app/asset/media/vuewallpaper1.jpeg',
+        wallpaper: 'asset/media/vuewallpaper1.jpeg',
     },
     methods : {
         srcCheck : function(src) {
