@@ -69,6 +69,7 @@ let xtoc = {
 // X-MAIN
 let xmain = {
     props: ['objmain','isdark'],
+    components: {},
     methods: {
         subTitleDash: (data) => {
             return data.replace(/ /g,'-');
@@ -104,7 +105,7 @@ let xmain = {
         
         <div class="result-wraper" v-if="objmain.content!==''">
             <small class="small-text">result</small>
-            <span v-html="objmain.content"></span>
+            <component v-bind:is="objmain.content"></component>
         </div>
 
         <a class="link-docs" target="_blank" :href="objmain.linkdocs">{{objmain.subTitle+' docs'}}</a>
@@ -119,10 +120,6 @@ const vbasic = {
         'x-btnup' : xbtnup,
         'x-toc'   : xtoc,
         'x-main'  : xmain,
-    },
-    mounted: function() {
-        hljs.highlightAll();
-        this.$emit('change-curr-url');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
         <x-header :title="title.vbasic" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
@@ -143,10 +140,6 @@ const vcomponent = {
         'x-toc'   : xtoc,
         'x-main'  : xmain,
     },
-    mounted: function() {
-        hljs.highlightAll();
-        this.$emit('change-curr-url');
-    },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
         <x-header :title="title.vcomponent" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
         <x-btnup @changecid="$emit('changecurrid',$event)"></x-btnup>
@@ -158,15 +151,20 @@ const vcomponent = {
 }
 
 let notfpage = {
-    props: ['logo'],
+    props: ['logo','darkon'],
     components: {
         'x-header': xheader,
     },
-    created: function(){
-        this.$emit('change-curr-url');
+    data(){
+        return{
+            path: ''
+        }
     },
-    template: `<section class="app">
-        <x-header title="404 not found" :logo="logo" ></x-header>
+    mounted(){
+        this.path = this.$route.path
+    },
+    template: `<section  :class="{app:true,darkmode:darkon === 'true'}">
+        <x-header :title="path+' not found'" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
     </section>` 
 }
 
@@ -199,14 +197,24 @@ const master = new Vue({
         darkOn: localStorage.getItem('darkOn') || 'false'
     },
     methods: {
-        changeCurrUrl: function() {
-            let arrUrl  = window.location.href.split('/');
-            this.currentUrl = arrUrl[arrUrl.length-1];
-        },
         changeDarkOn: function() {
+            hljs.configure({ ignoreUnescapedHTML: true })
+            hljs.highlightAll();
             this.darkOn = (this.darkOn == 'false') ? 'true' : 'false';
             localStorage.setItem('darkOn',this.darkOn);
-            hljs.highlightAll();
         },
     },
+    created(){
+        hljs.configure({ ignoreUnescapedHTML: true })
+        hljs.highlightAll();
+        let arrUrl  = window.location.href.split('/');
+        this.currentUrl = arrUrl[arrUrl.length-1];
+    },
+    updated(){
+        hljs.configure({ ignoreUnescapedHTML: true })
+        hljs.highlightAll();
+        let arrUrl  = window.location.href.split('/');
+        this.currentUrl = arrUrl[arrUrl.length-1];
+    },
+    mounted(){}
 });

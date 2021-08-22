@@ -25,20 +25,18 @@
             <div class="link-wraper">
                 <router-link 
                 to="/"
-                :class="{clicked:currentUrl == '',link:true}" 
-                @click.native="changeCurrUrl()">
+                :class="{clicked:currentUrl == '',link:true}">
                     basic
                 </router-link>
                 <router-link 
                 to="/component"
-                :class="{clicked:currentUrl == 'component',link:true}" 
-                @click.native="changeCurrUrl()">
+                :class="{clicked:currentUrl == 'component',link:true}">
                     component
                 </router-link>
             </div>
         </nav>
         
-        <!-- <transition name="fade"> -->
+        <transition name="fade">
             <router-view 
                 :logo="logo" 
                 :title="title"
@@ -46,10 +44,9 @@
                 :currentid="currentId"
                 :darkon="darkOn"
                 @changecurrid="currentId=$event"
-                @change-darkon="changeDarkOn"
-                @change-curr-url="changeCurrUrl()">
+                @change-darkon="changeDarkOn">
             </router-view>
-        <!-- </transition> -->
+        </transition>
     </div>
 
     <!-- ////////////////////////////////////////////////////////////////// -->
@@ -59,13 +56,36 @@
         });
     </script>
 
-    <!-- <script src="asset/vue/vue.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
+    <script src="asset/vue/vue.min.js"></script>
     <script src="asset/vue/vue-router.min.js"></script>
     <script src="asset/highlight/highlight.min.js"></script>
     <script src="index.js"></script>
     <script src="vuebasic.js"></script>
     <script src="vuecomponent.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyBnbwsWdoqeDViZTdLSP4d_Rc7wVVWlSEA",
+            authDomain: "vuecheatsheet.firebaseapp.com",
+            projectId: "vuecheatsheet",
+            storageBucket: "vuecheatsheet.appspot.com",
+            messagingSenderId: "96658052081",
+            appId: "1:96658052081:web:cdc78e6fa97eb38cc3ea50",
+            measurementId: "G-DK4WB3KECP"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
    
 </body>
 </html>
