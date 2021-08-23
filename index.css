@@ -284,6 +284,15 @@ header.darkmode .title{
     box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.15);
     border-radius: 4px;
 }
+.code-wraper .type{
+    position: absolute;
+    right: 8px;
+    bottom: 5px;
+    font-family: 'quicksand-bold', sans-serif;
+    color: rgba(52, 73, 94, 0.2);
+    font-size: 12px;
+}
+
 .result-wraper{
     border-left: 4px solid #41B883;
     margin-top: 16px;
@@ -330,7 +339,7 @@ footer.darkmode{
     }
 
     #master{
-        padding: 0 20px 30px 20px;
+        padding: 0 20px 0px 20px;
     }
 
     nav{

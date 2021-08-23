@@ -43,7 +43,7 @@ Vue.component('x-btnup',{
 })
 
 // X-TOC
-Vue.component('x-toc',{
+Vue.component('x-table',{
     props: {
         objmain: '',
         cid: '',
@@ -88,30 +88,45 @@ Vue.component('x-main',{
             setTimeout(() => {
                 event.target.innerText = 'copy';
             }, 1200);
+        },
+        checkContentType: function(data){
+            if(/data:image/.test(data)){
+                return 'image';
+            }
+            if(/data:video/.test(data)){
+                return 'video';
+            }
         }
     },
     template: `<main>
         <h1 class="sub-title" :id="subTitleDash(objmain.subTitle)">{{ objmain.subTitle }}</h1>
 
-        <div class="code-wraper" v-if="objmain.codeHtml !== ''">
+        <div class="code-wraper" v-if="objmain.codeHtml">
             <div :class="{'btn-copy':true,darkmode:isdark=='true'}" @click="copyCode(objmain.codeHtml,$event)">copy</div>
             <textarea class="temp-textarea"></textarea>
             <pre><code v-html="objmain.codeHtml" :class="{'language-html':true}"></code></pre>
+            <span class="type">html</span>
         </div>
-        <div class="code-wraper" v-if="objmain.codeJs !== ''">
+        <div class="code-wraper" v-if="objmain.codeJs">
             <div :class="{'btn-copy':true,darkmode:isdark=='true'}" @click="copyCode(objmain.codeJs,$event)">copy</div>
             <textarea class="temp-textarea"></textarea>
             <pre><code v-html="objmain.codeJs" :class="{'language-javascript':true}"></code></pre>
+            <span class="type">js</span>
         </div>
-        <div class="code-wraper" v-if="objmain.codeCss !== ''">
+        <div class="code-wraper" v-if="objmain.codeCss">
             <div :class="{'btn-copy':true,darkmode:isdark=='true'}" @click="copyCode(objmain.codeCss,$event)">copy</div>
             <textarea class="temp-textarea"></textarea>
             <pre><code v-html="objmain.codeCss" :class="{'language-css':true}"></code></pre>
+            <span class="type">css</span>
         </div>
         
-        <div :class="{'result-wraper':true,darkmode:isdark=='true'}" v-if="objmain.content!==''">
+        <div :class="{'result-wraper':true,darkmode:isdark=='true'}" v-if="objmain.content">
             <small class="small-text">result</small>
-            <span v-html="objmain.content"></span>
+            <img class="result" v-if="checkContentType(objmain.content)=='image'" :src="objmain.content">
+            <video class="result" v-if="checkContentType(objmain.content)=='video'" controls>
+                <source :src="objmain.content" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         <a class="link-docs" target="_blank" v-if="objmain.linkdocs" :href="objmain.linkdocs">{{objmain.subTitle+' docs'}}</a>
@@ -122,15 +137,13 @@ Vue.component('x-main',{
 const vbasic = { 
     props: ['logo','title','currentid','lesson','darkon'],
     mounted(){
-        hljs.configure({ ignoreUnescapedHTML: true })
-        hljs.highlightAll();
-        let arrUrl  = window.location.href.split('/');
-        this.$emit('changecurrurl',arrUrl[arrUrl.length-1]);
+        this.$emit('hljson');
+        this.$emit('changecurrurl');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
         <x-header :title="title.vbasic" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
         <x-btnup @changecid="$emit('changecurrid',$event)" :isdark="darkon"></x-btnup>
-        <x-toc @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vbasic" :isdark="darkon"></x-toc>
+        <x-table @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vbasic" :isdark="darkon"></x-table>
         <template v-for="obj of lesson.vbasic">
             <x-main :objmain="obj" :isdark="darkon"></x-main>
         </template>
@@ -141,15 +154,13 @@ const vbasic = {
 const vcomponent = { 
     props: ['logo','title','currentid','lesson','darkon'],
     mounted(){
-        hljs.configure({ ignoreUnescapedHTML: true })
-        hljs.highlightAll();
-        let arrUrl  = window.location.href.split('/');
-        this.$emit('changecurrurl',arrUrl[arrUrl.length-1]);
+        this.$emit('hljson');
+        this.$emit('changecurrurl');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
         <x-header :title="title.vcomponent" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
         <x-btnup @changecid="$emit('changecurrid',$event)"></x-btnup>
-        <x-toc @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vcomponent" :isdark="darkon"></x-toc>
+        <x-table @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vcomponent" :isdark="darkon"></x-table>
         <template v-for="obj of lesson.vcomponent">
             <x-main :objmain="obj" :isdark="darkon"></x-main>
         </template>
@@ -158,16 +169,8 @@ const vcomponent = {
 
 let notfpage = {
     props: ['logo','darkon'],
-    data(){
-        return{
-            path: ''
-        }
-    },
-    mounted(){
-        this.path = this.$route.path
-    },
     template: `<section  :class="{app:true,darkmode:darkon === 'true'}">
-        <x-header :title="path+' not found'" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
+        <x-header :title="$route.path+' not found'" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
     </section>` 
 }
 
@@ -194,23 +197,55 @@ const master = new Vue({
         currentId : '',
         currentUrl: '',
         lesson    : {
-            vbasic     : [],
-            vcomponent : []
+            vbasic: [],
+            vcomponent: []
         },
         darkOn: localStorage.getItem('darkOn') || 'false'
     },
     methods: {
-        changeDarkOn: function() {
-            hljs.configure({ ignoreUnescapedHTML: true })
-            hljs.highlightAll();
+        changeDarkOn() {
+            this.hljsOn();
             this.darkOn = (this.darkOn == 'false') ? 'true' : 'false';
             localStorage.setItem('darkOn',this.darkOn);
         },
+        hljsOn() {
+            setTimeout(() => {
+                hljs.configure({ ignoreUnescapedHTML: true })
+                hljs.highlightAll();
+            }, 0);
+        },
+        changeCurrUrl() {
+            let arrUrl  = window.location.href.split('/');
+            this.currentUrl = arrUrl[arrUrl.length-1];
+        },
+        renderLessons(items) {
+            // push data to this.lessson
+            items.val().forEach(l => {
+                // if(this.lesson[l.title] == undefined){
+                //     this.lesson[l.title] = [];
+                // }
+                this.lesson[l.title].push({
+                    subTitle : l.subtitle,
+                    codeHtml : (l.codeHtml) ? filterCode(l.codeHtml) : false,
+                    codeJs   : (l.codeJs)   ? filterCode(l.codeJs)   : false,
+                    codeCss  : (l.codeCss)  ? filterCode(l.codeCss)  : false,
+                    content  : l.content,
+                    linkdocs : l.linkdocs
+                });
+            });
+            // filter HTML,Js,Css code
+            function filterCode(data){
+                let code =  data.replace(/</g,'&lt;');
+                return code.replace(/spasi/g,'\n');
+            }
+            // run highlght.js
+            this.hljsOn();
+            this.changeCurrUrl();
+        }
     },
     created(){
-        hljs.configure({ ignoreUnescapedHTML: true })
-        hljs.highlightAll();
-        let arrUrl  = window.location.href.split('/');
-        this.currentUrl = arrUrl[arrUrl.length-1];
+        lessonsTable.on('value',this.renderLessons,(error) => {
+            console.log(error);
+        });
     },
 });

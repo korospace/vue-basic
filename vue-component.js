@@ -1,32 +1,19 @@
 // 12-component-registration
-let codeHtml12 = `<!-- html -->
-<div id="myApp">
-    <my-component-a></my-component-a>
-    <my-component-b></my-component-b>
-</div>`;
+let codeHtml12 = `<div id="myApp">spasi
+    <my-component-a></my-component-a>spasi
+    <my-component-b></my-component-b>spasi</div>`;
 
-let codeJs12 = `/* js */
-
-// Global Registration
-Vue.component('my-component-a',{
-    template: \`<div>
-        <h1>hello component A</h1>
-    </div>\`
-})
-
-// Local Registration
-let mycomponentb = {
-    template: \`<div>
-        <h1>hello component B</h1>
-    </div>\`
-}
-
-let vm = new Vue({
-    el: '#myApp',
-    components: {
-        'my-component-b' : mycomponentb
-    }
-})`;
+// let codeJs12 = `// Global RegistrationspasiVue.component('my-component-a',{spasi
+//     template: `<div>spasi
+//         <h1>hello component A</h1>spasi
+//     </div>`spasi})spasispasi// Local Registrationspasilet mycomponentb = {spasi
+//     template: `<div>spasi
+//         <h1>hello component B</h1>spasi
+//     </div>`spasi}spasispasilet vm = new Vue({spasi
+//     el: '#myApp',spasi
+//     components: {spasi
+//         'my-component-b' : mycomponentbspasi
+//     }spasi})`;
 
 master.lesson.vcomponent.push({
     subTitle : 'component registration',
@@ -38,16 +25,14 @@ master.lesson.vcomponent.push({
 });
 
 // 13-reusable-component
-let codeHtml13 = `<!-- html -->
-<div id="myApp">
+let codeHtml13 = `<div id="myApp">
     <x-toggle></x-toggle>
     <x-toggle></x-toggle>
     <x-toggle></x-toggle>
     <x-toggle></x-toggle>
 </div>`;
 
-let codeJs13 = `/* js */
-Vue.component('x-toggle',{
+let codeJs13 = `Vue.component('x-toggle',{
     data(){
         return{
             isClicked: false
@@ -62,8 +47,7 @@ let vm = new Vue({
     el: '#myApp',
 })`;
 
-let codeCss13 = `/* css */
-.toggle-wraper{
+let codeCss13 = `.toggle-wraper{
     width: 50px;
     height: 20px;
     border-radius: 10px;
@@ -101,13 +85,11 @@ master.lesson.vcomponent.push({
 });
 
 // 14-passing-data-with-props
-let codeHtml14 = `<!-- html -->
-<div id="myApp">
+let codeHtml14 = `<div id="myApp">
     <x-list :datastudent="students"></x-list>
 </div>`;
 
-let codeJs14 = `/* js */
-Vue.component('x-list',{
+let codeJs14 = `Vue.component('x-list',{
     props: ['datastudent'],
     template: \`<ul>
         <li v-for="s in datastudent">
@@ -138,14 +120,12 @@ master.lesson.vcomponent.push({
 });
 
 // 15-emitting-value-using-$emit 
-let codeHtml15 = `<!-- html -->
-<div id="myApp">
+let codeHtml15 = `<div id="myApp">
     <x-result :datanum="num"></x-result>
     <x-btncount @do-count="num++"></x-btncount>
 </div>`;
 
-let codeJs15 = `/* js */
-Vue.component('x-result',{
+let codeJs15 = `Vue.component('x-result',{
     props: ['datanum'],
     template: \`<h1>result count: {{datanum}}</h1>\`
 })
@@ -176,14 +156,12 @@ master.lesson.vcomponent.push({
 });
 
 // 16-dollar-event-in-emit 
-let codeHtml16 = `<!-- html -->
-<div id="myApp">
+let codeHtml16 = `<div id="myApp">
     <x-result :datamsg="message"></x-result>
     <x-input @changemsg="message = $event"></x-inp>
 </div>`;
 
-let codeJs16 = `/* js */
-Vue.component('x-result',{
+let codeJs16 = `Vue.component('x-result',{
     props: ['datamsg'],
     template: \`<h1>message: {{datamsg}}</h1>\`
 })
@@ -212,8 +190,7 @@ master.lesson.vcomponent.push({
 });
 
 // 17-form-submit
-let codeHtml17 = `<!-- html -->
-<div id="myApp">
+let codeHtml17 = `<div id="myApp">
     <x-form @insert-data="insertData($event)"></x-form>
     <hr>
     <div style="display: flex;">
@@ -316,13 +293,11 @@ master.lesson.vcomponent.push({
 });
 
 // 18-component-in-component 
-let codeHtml18 = `<!-- html -->
-<div id="myApp">
+let codeHtml18 = `<div id="myApp">
     <x-container></x-container>
 </div>`;
 
-let codeJs18 = `/* js */
-let xheader = {
+let codeJs18 = `let xheader = {
     template: \`<div style="padding:20px 0;background-color:red;">
         header
     </div>\`

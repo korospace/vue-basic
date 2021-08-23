@@ -40,7 +40,8 @@
                 :lesson="lesson"
                 :currentid="currentId"
                 :darkon="darkOn"
-                @changecurrurl="currentUrl=$event"
+                @hljson="hljsOn"
+                @changecurrurl="changeCurrUrl"
                 @changecurrid="currentId=$event"
                 @change-darkon="changeDarkOn">
             </router-view>
@@ -56,14 +57,33 @@
     <script src="asset/vue/vue.min.js"></script>
     <script src="asset/vue/vue-router.min.js"></script>
     <script src="asset/highlight/highlight.min.js"></script>
-    <script src="index.js"></script>
-    <script src="vue-basic.js"></script>
-    <script src="vue-component.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <script>
         window.addEventListener('load', () => {
             document.querySelector('#loading-page').classList.add('hide');
         });
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyBnbwsWdoqeDViZTdLSP4d_Rc7wVVWlSEA",
+            authDomain: "vuecheatsheet.firebaseapp.com",
+            databaseURL: "https://vuecheatsheet-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "vuecheatsheet",
+            storageBucket: "vuecheatsheet.appspot.com",
+            messagingSenderId: "96658052081",
+            appId: "1:96658052081:web:cdc78e6fa97eb38cc3ea50",
+            measurementId: "G-DK4WB3KECP"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const database     = firebase.database();
+        const lessonsTable = database.ref('lessons');
     </script>
+    <script src="index.js"></script>
+    <!-- <script src="vue-basic.js"></script>
+    <script src="vue-component.js"></script> -->
    
 </body>
 </html>
