@@ -13,7 +13,6 @@ let xheader = {
     </header>`
 }
 
-// X-BTNUP
 let xbtnup = {
     props: ['isdark'],
     data() {
@@ -26,10 +25,18 @@ let xbtnup = {
         this.scrollpx = window.scrollY
       });
     },
+    methods: {
+        goToTop: function() {
+            window.scrollTo({
+                top: document.querySelector('nav').offsetTop,
+                behavior: "smooth"
+            })
+        },
+    },
     template: `<a 
-    href="#" 
+    href="" 
     :class="{show: scrollpx > 100,'btn-up':true,darkmode:isdark == 'true'}" 
-    @click="$emit('changecid', '')"
+    @click.prevent="$emit('changecid', ''),goToTop()"
     >
         up
     </a>`
@@ -69,7 +76,6 @@ let xtoc = {
 // X-MAIN
 let xmain = {
     props: ['objmain','isdark'],
-    components: {},
     methods: {
         subTitleDash: (data) => {
             return data.replace(/ /g,'-');
@@ -105,7 +111,7 @@ let xmain = {
         
         <div class="result-wraper" v-if="objmain.content!==''">
             <small class="small-text">result</small>
-            <component v-bind:is="objmain.content"></component>
+            <span v-html="objmain.content"></span>
         </div>
 
         <a class="link-docs" target="_blank" :href="objmain.linkdocs">{{objmain.subTitle+' docs'}}</a>

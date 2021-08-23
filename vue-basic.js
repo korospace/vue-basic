@@ -62,35 +62,22 @@ const vm = new Vue({
     el   : '#myApp',
     data : {
         testVOnce : 'this is an unalterable text',
-        testVText : '&lt;span style="color:red;">like innerText&lt;/span>',
-        testVHtml : '&lt;span style="color:red;">like innerHTML&lt;/span>',
+        testVText : '<span style="color:red;">like innerText</span>',
+        testVHtml : '<span style="color:red;">like innerHTML</span>',
     },
 });
 
 // v-once atribute make your value is unalterable
 vm.testVOnce = "edit variable testVOnce";`;
 
-let componentRes3 = {
-    data(){
-        return{
-            testVOnce : 'this is an unalterable text',
-            testVText : '<span style="color:red;">like innerText</span>',
-            testVHtml : '<span style="color:red;">like innerHTML</span>',
-        }
-    },
-    template: codeHtml3
-}
-
-xmain.components.xcomres3 = componentRes3;
 master.lesson.vbasic.push({
     subTitle : 'directive',
     codeHtml : codeHtml3.replace(/</g,'&lt;'),
-    codeJs   : codeJs3,
+    codeJs   : codeJs3.replace(/</g,'&lt;'),
     codeCss  : '',
-    content  : 'xcomres3',
+    content  : `<img class="result" src="asset/media/3-directive.png">`,
     linkdocs : 'https://vuejs.org/v2/api/#Directives'
 });
-
 
 // 4-event-handling
 let codeHtml4 = `<!-- html -->
@@ -98,7 +85,7 @@ let codeHtml4 = `<!-- html -->
     <p>Author-name: {{ author }}</p>
     <p>Author-age : {{ age }}</p>
     <button v-on:click="editAuthor()">edit</button>
-</div>`
+</div>`;
 
 let codeJs4 = `/* js */
 const vm = new Vue({
@@ -115,29 +102,15 @@ const vm = new Vue({
     },
 })`;
 
-let componentRes4 = {
-    data(){
-        return{
-            author : 'korospace',
-            age : 22,
-        }
-    },
-    methods : {
-        editAuthor : function() {
-            this.author = prompt("new author's name");
-            this.age    = parseInt(prompt("new author's age"));
-        }
-    },
-    template: codeHtml4
-}
-
-xmain.components.xcomres4 = componentRes4;
 master.lesson.vbasic.push({
     subTitle : 'event handling',
     codeHtml : codeHtml4.replace(/</g,'&lt;'),
     codeJs   : codeJs4,
     codeCss  : '',
-    content  : 'xcomres4',
+    content  : `<video class="result" controls>
+        <source src="asset/media/4-event-handling.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/events.html#Listening-to-Events'
 });
 
@@ -145,7 +118,6 @@ master.lesson.vbasic.push({
 let codeHtml5 = `<!-- html -->
 <div id="myApp">
     <a href="" @click="warn('be carefull')">without prevent</a>
-    <br>
     <a href="" @click.prevent="warn('be carefull')">with prevent</a>
 </div>`;
 
@@ -159,22 +131,15 @@ const vm = new Vue({
     },
 });`;
 
-let componentRes5 = {
-    methods : {
-        warn: function(message) {
-            alert(message);
-        }
-    },
-    template: codeHtml5
-}
-
-xmain.components.xcomres5 = componentRes5;
 master.lesson.vbasic.push({
     subTitle : 'event modifier',
     codeHtml : codeHtml5.replace(/</g,'&lt;'),
     codeJs   : codeJs5,
     codeCss  : '',
-    content  : 'xcomres5',
+    content  : `<video class="result" controls>
+        <source src="asset/media/5-event-modifier.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/events.html#Event-Modifiers'
 });
 
@@ -199,26 +164,15 @@ const vm = new Vue({
     }
 });`;
 
-let componentRes6 = {
-    methods : {
-        testing1: function(event){
-            console.log(event.target); // &lt;button>
-        },
-        testing2: function(message,event){
-            console.log(message);      // hello world
-            console.log(event.target); // &lt;button>
-        }
-    },
-    template: codeHtml6
-}
-
-xmain.components.xcomres6 = componentRes6;
 master.lesson.vbasic.push({
     subTitle : 'dollar event',
     codeHtml : codeHtml6.replace(/</g,'&lt;'),
     codeJs   : codeJs6,
     codeCss  : '',
-    content  : 'xcomres6',
+    content  : `<video class="result" controls>
+        <source src="asset/media/6-dollar-event.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/events.html#Event-Modifiers'
 });
 
@@ -266,38 +220,15 @@ let codeCss7 = `/* css */
     padding: 4px 8px;
 }`;
 
-let componentRes7 = {
-    data () {
-        return {
-            arrayTag  : [],
-        }
-    },
-    methods: {
-        tagMaker : function() {
-            let el = '';
-            this.arrayTag.forEach(e => {
-                el += `<span class="tag-span">${e}</span>`;
-            });
-            return el;
-        }
-    },
-    mounted(){
-        let tagHead  = document.head;
-        if(tagHead.querySelector('style') == null){
-            tagHead.insertBefore(document.createElement('style'),tagHead.firstElementChild);
-        }
-        tagHead.querySelector('style').innerHTML = tagHead.querySelector('style').innerHTML+codeCss7;
-    },
-    template: codeHtml7
-}
-
-xmain.components.xcomres7 = componentRes7;
 master.lesson.vbasic.push({
     subTitle : 'two ways data binding',
     codeHtml : codeHtml7.replace(/</g,'&lt;'),
     codeJs   : codeJs7.replace(/</g,'&lt;'),
     codeCss  : codeCss7,
-    content  : 'xcomres7',
+    content  : `<video class="result" controls>
+        <source src="asset/media/7-two-ways-data-binding.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/api/#v-model'
 });
 
@@ -305,8 +236,7 @@ master.lesson.vbasic.push({
 let codeHtml8 = `<!-- html -->
 <div id="myApp">
     <input v-model="numVal" type="text">
-    <br>
-    <small v-html="numCheck"></small>
+    <p v-text="numCheck"></p>
 </div>`;
 
 let codeJs8 = `/* js */
@@ -323,59 +253,29 @@ const vm = new Vue({
             }
             // if insert contains character
             else if(!/^\\d+$/.test(this.numVal)){
-                return '*only number allowed';
+                return 'only number allowed';
             }
             else{
-                let message = "";
                 if(this.numVal%2 === 0){
                     return "this is an 'even' number";
                 }
                 else{
                     return "this is an 'odd' number";
                 }
-                return \`<span class="success">\${message}</span>\`;
             }
         }
     }
 });`;
 
-let componentRes8 = {
-    data () {
-        return {
-            numVal : '',
-        }
-    },
-    computed: {
-        numCheck : function() {
-            // if insert is empty
-            if(this.numVal === ""){
-                return '*please, insert number';
-            }
-            // if insert contains character
-            else if(!/^\d+$/.test(this.numVal)){
-                return '*only number allowed';
-            }
-            else{
-                if(this.numVal%2 === 0){
-                    return "this is an 'even' number";
-                }
-                else{
-                    return "this is an 'odd' number";
-                }
-            }
-        }
-    },
-    mounted(){},
-    template: codeHtml8
-}
-
-xmain.components.xcomres8 = componentRes8;
 master.lesson.vbasic.push({
     subTitle : 'computed property',
     codeHtml : codeHtml8.replace(/</g,'&lt;'),
     codeJs   : codeJs8,
     codeCss  : '',
-    content  : 'xcomres8',
+    content  : `<video class="result" controls>
+        <source src="asset/media/8-computed-property.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/computed.html'
 });
 
@@ -385,7 +285,7 @@ let codeHtml9 = `<!-- html -->
     <input type="text" placeholder="type something" v-on:keyup="insertValueDataInput"><br><br>
     <b>data type:</b>
     <span id="span-wraper" v-show="dataInput !== ''">
-        <span v-if="/true|false/.test(dataInput.toLowerCase())">boolean</span>
+        <span v-if="/true|false/.test(dataInput)">boolean</span>
         <span v-else-if="!/^\\d+$/.test(dataInput) && !/[^\\w\\s]/gi.test(dataInput)">string</span>
         <span v-else-if="/{/g.test(dataInput) && /}/g.test(dataInput)">object</span>
         <span v-else-if="/\\[/g.test(dataInput) && /\\]/g.test(dataInput)">array</span>
@@ -406,39 +306,25 @@ const vm = new Vue({
     }
 });`;
 
-let componentRes9 = {
-    data () {
-        return {
-            dataInput : '',
-        }
-    },
-    methods: {
-        insertValueDataInput : function(event) {
-            this.dataInput = event.target.value;
-        }
-    },
-    mounted(){},
-    template: codeHtml9
-}
-
-xmain.components.xcomres9 = componentRes9;
 master.lesson.vbasic.push({
     subTitle : 'conditional rendering',
     codeHtml : codeHtml9.replace(/</g,'&lt;'),
     codeJs   : codeJs9,
     codeCss  : '',
-    content  : 'xcomres9',
+    content  : `<video class="result" controls>
+        <source src="asset/media/9-conditional-rendering.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/conditional.html'
 });
-
 
 // 10-attribute-binding
 let codeHtml10 = `<!-- html -->
 <div id="myApp">
     <img id="jumbotron" :src="wallpaper" width="500">
     <div id="thumbnail-wraper">
-        <img src="asset/media/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
-        <img src="asset/media/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
+        <img src="https://vuecheatsheet.netlify.app/asset/media/vuewallpaper1.jpeg" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper1.jpeg')}">
+        <img src="https://vuecheatsheet.netlify.app/asset/media/vuewallpaper2.png" @click="changeWallpaper" :class="{clicked: srcCheck('vuewallpaper2.png')}">
     </div>
 </div>`;
 
@@ -446,7 +332,7 @@ let codeJs10 = `/* js */
 const vm = new Vue({
     el   : '#myApp', 
     data : {
-        wallpaper: 'asset/media/vuewallpaper1.jpeg',
+        wallpaper: 'https://vuecheatsheet.netlify.app/asset/media/vuewallpaper1.jpeg',
     },
     methods : {
         srcCheck : function(src) {
@@ -461,7 +347,7 @@ const vm = new Vue({
 
 let codeCss10 = `/* css */
 #jumbotron{
-    width: 200px;
+    width: 300px;
     margin-bottom: 10px;
 }
 #thumbnail-wraper{
@@ -472,48 +358,24 @@ let codeCss10 = `/* css */
     cursor: pointer;
     opacity: 0.5;
     margin-right: 4px;
-    width: 50px;
+    width: 148px;
 }
 #thumbnail-wraper img.clicked{
     cursor: default;
     opacity: 1;
 }`;
 
-let componentRes10 = {
-    data () {
-        return {
-            wallpaper: 'https://vuecheatsheet.netlify.app/asset/media/vuewallpaper1.jpeg',
-        }
-    },
-    methods: {
-        srcCheck : function(src) {
-            let srcSplited = this.wallpaper.split('/');
-            return src === srcSplited[srcSplited.length-1];
-        },
-        changeWallpaper : function(event) {
-            this.wallpaper = event.target.src;
-        },
-    },
-    mounted(){
-        let tagHead  = document.head;
-        if(tagHead.querySelector('style') == null){
-            tagHead.insertBefore(document.createElement('style'),tagHead.firstElementChild);
-        }
-        tagHead.querySelector('style').innerHTML = tagHead.querySelector('style').innerHTML+codeCss10;
-    },
-    template: codeHtml10
-}
-
-xmain.components.xcomres10 = componentRes10;
 master.lesson.vbasic.push({
     subTitle : 'attribute binding',
     codeHtml : codeHtml10.replace(/</g,'&lt;'),
     codeJs   : codeJs10,
     codeCss  : codeCss10,
-    content  : 'xcomres10',
+    content  : `<video class="result" controls>
+        <source src="asset/media/10-attribute-binding.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/security.html#Injecting-URLs'
 });
-
 
 // 11-looping
 let codeHtml11 = `<!-- html -->
@@ -600,65 +462,14 @@ b.cross{
     cursor: pointer;
 }`;
 
-
-let componentRes11 = {
-    data () {
-        return {
-            itemsTodo : ['learning vue','hunting job'],
-            crossItem : ['learning vue'],
-        }
-    },
-    methods: {
-        addItem: function(inputType,event) {
-            let newItem = '';
-            (inputType == 'enter') ? newItem = event.target.value : newItem = event.target.previousElementSibling.value;
-            (newItem !== '') ? this.itemsTodo.push(newItem) : '';
-            (inputType == 'enter') ? event.target.value = '' : event.target.previousElementSibling.value = '';
-        },
-        addCrossItem : function(event) {
-            let isExist  = false;
-            let item     = event.target.value;
-            let elementP = event.target.parentElement.previousElementSibling;
-
-            this.crossItem.forEach(e => {
-               if(e === item){
-                   isExist = true;
-               } 
-            });
-
-            if(!isExist){
-                this.crossItem.push(item);
-                elementP.classList.add('cross');
-            }
-            else{
-                this.crossItem = this.crossItem.filter(e => e !== item);
-                elementP.classList.remove('cross');
-            }
-        },
-        crossCheck: function(item){
-            let isExist = this.crossItem.find(e => e === item);
-            return isExist;
-        },
-        deleteItem: function(event) {
-            this.itemsTodo = this.itemsTodo.filter(e => e !== event.target.dataset.value);
-        }
-    },
-    mounted(){
-        let tagHead  = document.head;
-        if(tagHead.querySelector('style') == null){
-            tagHead.insertBefore(document.createElement('style'),tagHead.firstElementChild);
-        }
-        tagHead.querySelector('style').innerHTML = tagHead.querySelector('style').innerHTML+codeCss11;
-    },
-    template: codeHtml11
-}
-
-xmain.components.xcomres11 = componentRes11;
 master.lesson.vbasic.push({
     subTitle : 'looping',
     codeHtml : codeHtml11.replace(/</g,'&lt;'),
     codeJs   : codeJs11,
     codeCss  : codeCss11,
-    content  : 'xcomres11',
+    content  : `<video class="result" controls>
+        <source src="asset/media/11-looping.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>`,
     linkdocs : 'https://vuejs.org/v2/api/#v-model'
 });
