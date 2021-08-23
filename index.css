@@ -289,6 +289,9 @@ header.darkmode .title{
     margin-top: 16px;
     padding: 0px 0px 0px 20px;
 }
+.result-wraper.darkmode{
+    border-left: 4px solid #34495E;
+}
 .temp-textarea{
     position: absolute;
     z-index: -100;

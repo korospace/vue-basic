@@ -109,7 +109,7 @@ let xmain = {
             <pre><code v-html="objmain.codeCss" :class="{'language-css':true}"></code></pre>
         </div>
         
-        <div class="result-wraper" v-if="objmain.content!==''">
+        <div :class="{'result-wraper':true,darkmode:isdark=='true'}" v-if="objmain.content!==''">
             <small class="small-text">result</small>
             <span v-html="objmain.content"></span>
         </div>

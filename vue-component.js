@@ -314,3 +314,54 @@ master.lesson.vcomponent.push({
     </video>`,
     linkdocs : 'https://vuejs.org/v2/guide/forms.html#Text'
 });
+
+// 18-component-in-component 
+let codeHtml18 = `<!-- html -->
+<div id="myApp">
+    <x-container></x-container>
+</div>`;
+
+let codeJs18 = `/* js */
+let xheader = {
+    template: \`<div style="padding:20px 0;background-color:red;">
+        header
+    </div>\`
+}
+
+let xmain = {
+    template: \`<div style="padding:40px 0;background-color:green;">
+        main
+    </div>\`
+}
+
+let xfooter = {
+    template: \`<div style="padding:20px 0;background-color:blue;">
+        footer
+    </div>\`
+}
+
+Vue.component('x-container',{
+    components:{
+        'x-header' : xheader,
+        'x-main'   : xmain,
+        'x-footer' : xfooter
+    },
+    template: \`<section style="width:300px;text-align:center;">
+        <x-header></x-header>
+        <x-main></x-main>
+        <x-footer></x-footer>
+    </section>\`
+})
+
+let vm = new Vue({
+    el: '#myApp',
+})`;
+
+master.lesson.vcomponent.push({
+    subTitle : 'component in component',
+    codeHtml : codeHtml18.replace(/</g,'&lt;'),
+    codeJs   : codeJs18.replace(/</g,'&lt;'),
+    codeCss  : '',
+    content  : `<img class="result" loading="lazy" src="asset/media/18-component-in-component.png">`,
+    linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
+});

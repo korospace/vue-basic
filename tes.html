@@ -1,0 +1,48 @@
+<!-- html -->
+<html>
+<body>
+<!-- html -->
+<div id="myApp">
+    <x-container></x-container>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+/* js */
+let xheader = {
+    template: `<div style="padding:20px 0;background-color:red;">
+        header
+    </div>`
+}
+
+let xmain = {
+    template: `<div style="padding:40px 0;background-color:green;">
+        main
+    </div>`
+}
+
+let xfooter = {
+    template: `<div style="padding:20px 0;background-color:blue;">
+        footer
+    </div>`
+}
+
+Vue.component('x-container',{
+    components:{
+        'x-header' : xheader,
+        'x-main'   : xmain,
+        'x-footer' : xfooter
+    },
+    template: `<section style="width:300px;text-align:center;">
+        <x-header></x-header>
+        <x-main></x-main>
+        <x-footer></x-footer>
+    </section>`
+})
+
+let vm = new Vue({
+    el: '#myApp',
+})
+    </script>
+</body>
+</html>
