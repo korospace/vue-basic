@@ -312,7 +312,7 @@ master.lesson.vcomponent.push({
         <source src="asset/media/17-form-validation.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>`,
-    linkdocs : 'https://vuejs.org/v2/guide/forms.html#Text'
+    linkdocs : ''
 });
 
 // 18-component-in-component 
@@ -363,5 +363,5 @@ master.lesson.vcomponent.push({
     codeJs   : codeJs18.replace(/</g,'&lt;'),
     codeCss  : '',
     content  : `<img class="result" loading="lazy" src="asset/media/18-component-in-component.png">`,
-    linkdocs : 'https://vuejs.org/v2/guide/components.html#Emitting-a-Value-With-an-Event'
+    linkdocs : ''
 });

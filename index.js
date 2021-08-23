@@ -1,5 +1,5 @@
 // X-HEADER
-let xheader = {
+Vue.component('x-header',{
     props: ['title','logo','isdark'],
     template: `<header :class="{darkmode:isdark == 'true'}">
         <img :src="logo">
@@ -11,9 +11,9 @@ let xheader = {
             </div>
         </div>
     </header>`
-}
+})
 
-let xbtnup = {
+Vue.component('x-btnup',{
     props: ['isdark'],
     data() {
         return {
@@ -40,10 +40,10 @@ let xbtnup = {
     >
         up
     </a>`
-}
+})
 
 // X-TOC
-let xtoc = {
+Vue.component('x-toc',{
     props: {
         objmain: '',
         cid: '',
@@ -71,10 +71,10 @@ let xtoc = {
             </a>
         </template>
     </div>`
-}
+})
 
 // X-MAIN
-let xmain = {
+Vue.component('x-main',{
     props: ['objmain','isdark'],
     methods: {
         subTitleDash: (data) => {
@@ -114,19 +114,13 @@ let xmain = {
             <span v-html="objmain.content"></span>
         </div>
 
-        <a class="link-docs" target="_blank" :href="objmain.linkdocs">{{objmain.subTitle+' docs'}}</a>
+        <a class="link-docs" target="_blank" v-if="objmain.linkdocs" :href="objmain.linkdocs">{{objmain.subTitle+' docs'}}</a>
     </main>`        
-}
+})
 
 // vue basic page
 const vbasic = { 
     props: ['logo','title','currentid','lesson','darkon'],
-    components: {
-        'x-header': xheader,
-        'x-btnup' : xbtnup,
-        'x-toc'   : xtoc,
-        'x-main'  : xmain,
-    },
     mounted(){
         hljs.configure({ ignoreUnescapedHTML: true })
         hljs.highlightAll();
@@ -146,12 +140,6 @@ const vbasic = {
 // vue component page
 const vcomponent = { 
     props: ['logo','title','currentid','lesson','darkon'],
-    components: {
-        'x-header': xheader,
-        'x-btnup' : xbtnup,
-        'x-toc'   : xtoc,
-        'x-main'  : xmain,
-    },
     mounted(){
         hljs.configure({ ignoreUnescapedHTML: true })
         hljs.highlightAll();
@@ -170,9 +158,6 @@ const vcomponent = {
 
 let notfpage = {
     props: ['logo','darkon'],
-    components: {
-        'x-header': xheader,
-    },
     data(){
         return{
             path: ''
