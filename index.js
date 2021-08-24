@@ -235,8 +235,7 @@ const master = new Vue({
             });
             // filter HTML,Js,Css code
             function filterCode(data){
-                let code =  data.replace(/</g,'&lt;');
-                return code.replace(/spasi/g,'\n');
+                return data.replace(/</g,'&lt;').replace(/spasi /g,'\n');;
             }
             // run highlght.js
             this.hljsOn();
