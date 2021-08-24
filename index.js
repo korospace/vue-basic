@@ -6,8 +6,8 @@ Vue.component('x-header',{
         <h1 class="title">{{ title }}</h1>
         <div class="toggle-dark-wraper" @click="$emit('change-isdark');">
             <div :class="{'toggle-dark':true,darkmode:isdark == 'true'}">
-                <img v-if="isdark == 'false'" src="asset/media/sun.png" width="100%" height="100%"/>
-                <img v-if="isdark == 'true'" src="asset/media/moon.png" width="40%" height="90%"/>
+                <img v-if="isdark == 'false'" src="asset/media/sun.webp" width="100%" height="100%"/>
+                <img v-if="isdark == 'true'" src="asset/media/moon.webp" width="40%" height="90%"/>
             </div>
         </div>
     </header>`
@@ -249,7 +249,7 @@ const master = new Vue({
             vbasic    : 'learning basic of vuejs',
             vcomponent: 'learning vue component'
         },
-        logo      : 'asset/media/vue-logo.svg',
+        logo      : 'asset/media/vue-logo.webp',
         currentId : '',
         currentUrl: '',
         lesson    : {

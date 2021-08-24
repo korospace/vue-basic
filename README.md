@@ -1,5 +1,5 @@
 # VUE CHEATSHEET
-This website contains my personal notes while learning vuejs
+This website contains my personal notes about basic of vuejs
 
 ## 1.Tools & Stack
 - [x] vuejs
@@ -10,4 +10,4 @@ This website contains my personal notes while learning vuejs
 ## 2. Preview
 You guys, can access it via <a href="https://vuecheatsheet.netlify.app/#/">https://vuecheatsheet.netlify.app/#/</a>
 
-> <img src="asset/media/preview.png" width="860px" /><br><br>
+> <img src="asset/media/preview.webp" width="860px" /><br><br>
