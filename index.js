@@ -136,18 +136,18 @@ Vue.component('x-main',{
 
 // X-SKELETON
 Vue.component('x-skeleton',{
-    props: ['hideskeleton'],
+    props: ['hideskeleton','isdark'],
     template: `<div :class="{'skeleton-wraper':true,pulse:true}" v-if="hideskeleton == false">
         <div :class="{'skeleton-header':true}">
-            <div :class="{'skeleton-logo':true}"></div>
-            <div :class="{'skeleton-title':true}"></div>
-            <div :class="{'skeleton-toggle':true}"></div>
-            <div :class="{'skeleton-table':true}"></div>
+            <div :class="{'skeleton-logo':true,'skeleton-dark':isdark=='true'}"></div>
+            <div :class="{'skeleton-title':true,'skeleton-dark':isdark=='true'}"></div>
+            <div :class="{'skeleton-toggle':true,'skeleton-dark':isdark=='true'}"></div>
+            <div :class="{'skeleton-table':true,'skeleton-dark':isdark=='true'}"></div>
         </div>
         <div v-for="i of [1,2]">
-            <div :class="{'skeleton-subtitle':true}"></div>
-            <div :class="{'skeleton-code':true}"></div>
-            <div :class="{'skeleton-linkdocs':true}"></div>
+            <div :class="{'skeleton-subtitle':true,'skeleton-dark':isdark=='true'}"></div>
+            <div :class="{'skeleton-code':true,'skeleton-dark':isdark=='true'}"></div>
+            <div :class="{'skeleton-linkdocs':true,'skeleton-dark':isdark=='true'}"></div>
         </div>
     </div>`
 });
@@ -194,7 +194,10 @@ const vcomponent = {
         this.$emit('changecurrurl');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
-        <x-skeleton :hideskeleton="skeletonoff"></x-skeleton>
+        <x-skeleton 
+            :isdark="darkon" 
+            :hideskeleton="skeletonoff">
+        </x-skeleton>
         <x-header 
             v-if="skeletonoff"
             :title="title.vcomponent" 
