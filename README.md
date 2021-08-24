@@ -10,4 +10,4 @@ This website contains my personal notes about basic of vuejs
 ## 2. Preview
 You guys, can access it via <a href="https://vuecheatsheet.web.app/#/">https://vuecheatsheet.web.app/#/</a>
 
-> <img src="asset/media/preview.webp" width="860px" /><br><br>
+> <img src="public/asset/media/preview.webp" width="860px" /><br><br>
