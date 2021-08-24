@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="asset/media/vue-logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="asset/highlight/styles/paraiso-light.min.css">
     <link rel="stylesheet" href="index.css">
-
 </head>
 <body>
     <section id="loading-page">
@@ -17,11 +16,15 @@
     </section>
 
     <div id="master" :class="{darkmode:darkOn == 'true'}">
+        <!-- NAVBAR -->
         <nav :class="{darkmode:darkOn == 'true'}">
+            <!-- NAV-LOGO -->
             <div class="logo-wraper">
                 <img :src="logo" width="30px">
                 <h1>cheatsheet</h1>
             </div>
+
+            <!-- NAV-LINKS -->
             <div class="link-wraper">
                 <router-link to="/" :class="{clicked:currentUrl == '',link:true}">
                     basic
@@ -33,6 +36,7 @@
             </div>
         </nav>
         
+        <!-- SECTION -->
         <transition name="fade">
             <router-view 
                 :logo="logo" 
@@ -40,6 +44,7 @@
                 :lesson="lesson"
                 :currentid="currentId"
                 :darkon="darkOn"
+                :skeletonoff="skeletonOff"
                 @hljson="hljsOn"
                 @changecurrurl="changeCurrUrl"
                 @changecurrid="currentId=$event"
@@ -47,14 +52,15 @@
             </router-view>
         </transition>
 
+        <!-- FOOTER -->
         <footer :class="{darkmode:darkOn == 'true'}">
             <p>build with &hearts; <a href="https://github.com/korospace" target="_blank">by elkoro</a></p>
         </footer>
     </div>
 
     <!-- ////////////////////////////////////////////////////////////////// -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
-    <script src="asset/vue/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- <script src="asset/vue/vue.min.js"></script> -->
     <script src="asset/vue/vue-router.min.js"></script>
     <script src="asset/highlight/highlight.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

@@ -13,6 +13,7 @@ Vue.component('x-header',{
     </header>`
 })
 
+// X-BTN UP
 Vue.component('x-btnup',{
     props: ['isdark'],
     data() {
@@ -42,7 +43,7 @@ Vue.component('x-btnup',{
     </a>`
 })
 
-// X-TOC
+// X-TABLE OF CONTENT
 Vue.component('x-table',{
     props: {
         objmain: '',
@@ -133,18 +134,53 @@ Vue.component('x-main',{
     </main>`        
 })
 
+// X-SKELETON
+Vue.component('x-skeleton',{
+    props: ['hideskeleton'],
+    template: `<div :class="{'skeleton-wraper':true,pulse:true}" v-if="hideskeleton == false">
+        <div :class="{'skeleton-header':true}">
+            <div :class="{'skeleton-logo':true}"></div>
+            <div :class="{'skeleton-title':true}"></div>
+            <div :class="{'skeleton-toggle':true}"></div>
+            <div :class="{'skeleton-table':true}"></div>
+        </div>
+        <div v-for="i of [1,2]">
+            <div :class="{'skeleton-subtitle':true}"></div>
+            <div :class="{'skeleton-code':true}"></div>
+            <div :class="{'skeleton-linkdocs':true}"></div>
+        </div>
+    </div>`
+});
+
 // vue basic page
 const vbasic = { 
-    props: ['logo','title','currentid','lesson','darkon'],
+    props: ['logo','title','currentid','lesson','darkon','skeletonoff'],
     mounted(){
         this.$emit('hljson');
         this.$emit('changecurrurl');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
-        <x-header :title="title.vbasic" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
-        <x-btnup @changecid="$emit('changecurrid',$event)" :isdark="darkon"></x-btnup>
-        <x-table @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vbasic" :isdark="darkon"></x-table>
-        <template v-for="obj of lesson.vbasic">
+        <x-skeleton :hideskeleton="skeletonoff"></x-skeleton>
+        <x-header 
+            v-if="skeletonoff"
+            :title="title.vbasic" 
+            :logo="logo" 
+            :isdark="darkon" 
+            @change-isdark="$emit('change-darkon')">
+        </x-header>
+        <x-btnup
+            v-if="skeletonoff"
+            :isdark="darkon"
+            @changecid="$emit('changecurrid',$event)">
+        </x-btnup>
+        <x-table 
+            v-if="skeletonoff"    
+            :cid="currentid" 
+            :objmain="lesson.vbasic" 
+            :isdark="darkon" 
+            @changecid="$emit('changecurrid',$event)">
+        </x-table>
+        <template v-if="skeletonoff" v-for="obj of lesson.vbasic">
             <x-main :objmain="obj" :isdark="darkon"></x-main>
         </template>
     </section>` 
@@ -152,16 +188,33 @@ const vbasic = {
 
 // vue component page
 const vcomponent = { 
-    props: ['logo','title','currentid','lesson','darkon'],
+    props: ['logo','title','currentid','lesson','darkon','skeletonoff'],
     mounted(){
         this.$emit('hljson');
         this.$emit('changecurrurl');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
-        <x-header :title="title.vcomponent" :logo="logo" :isdark="darkon" @change-isdark="$emit('change-darkon')"></x-header>
-        <x-btnup @changecid="$emit('changecurrid',$event)"></x-btnup>
-        <x-table @changecid="$emit('changecurrid',$event)" :cid="currentid" :objmain="lesson.vcomponent" :isdark="darkon"></x-table>
-        <template v-for="obj of lesson.vcomponent">
+        <x-skeleton :hideskeleton="skeletonoff"></x-skeleton>
+        <x-header 
+            v-if="skeletonoff"
+            :title="title.vcomponent" 
+            :logo="logo" 
+            :isdark="darkon" 
+            @change-isdark="$emit('change-darkon')">
+        </x-header>
+        <x-btnup
+            v-if="skeletonoff"
+            :isdark="darkon"
+            @changecid="$emit('changecurrid',$event)">
+        </x-btnup>
+        <x-table 
+            v-if="skeletonoff"    
+            :cid="currentid" 
+            :objmain="lesson.vcomponent" 
+            :isdark="darkon" 
+            @changecid="$emit('changecurrid',$event)">
+        </x-table>
+        <template v-if="skeletonoff" v-for="obj of lesson.vcomponent">
             <x-main :objmain="obj" :isdark="darkon"></x-main>
         </template>
     </section>` 
@@ -200,6 +253,7 @@ const master = new Vue({
             vbasic: [],
             vcomponent: []
         },
+        skeletonOff: false,
         darkOn: localStorage.getItem('darkOn') || 'false'
     },
     methods: {
@@ -240,6 +294,7 @@ const master = new Vue({
             // run highlght.js
             this.hljsOn();
             this.changeCurrUrl();
+            this.skeletonOff = true;
         }
     },
     created(){
