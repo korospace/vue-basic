@@ -8,6 +8,6 @@ This website contains my personal notes about basic of vuejs
 - [x] CSS3
 
 ## 2. Preview
-You guys, can access it via <a href="https://vuecheatsheet.netlify.app/#/">https://vuecheatsheet.netlify.app/#/</a>
+You guys, can access it via <a href="https://vuecheatsheet.web.app/#/">https://vuecheatsheet.web.app/#/</a>
 
 > <img src="asset/media/preview.webp" width="860px" /><br><br>
