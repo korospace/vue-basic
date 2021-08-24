@@ -160,7 +160,9 @@ const vbasic = {
         this.$emit('changecurrurl');
     },
     template: `<section :class="{app:true,darkmode:darkon === 'true'}">
-        <x-skeleton :hideskeleton="skeletonoff"></x-skeleton>
+        <x-skeleton
+            :isdark="darkon" 
+            :hideskeleton="skeletonoff"></x-skeleton>
         <x-header 
             v-if="skeletonoff"
             :title="title.vbasic" 
