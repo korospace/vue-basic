@@ -83,10 +83,17 @@ html,body,#master{
     padding: 0 60px 0px 60px;
     font-family: 'quicksand-reg', sans-serif;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 #master.darkmode{
     background-color: #34495E;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1140px;
 }
 
 /* NAVBAR */
